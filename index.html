@@ -569,7 +569,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-15 15:43:19" itemprop="dateModified" datetime="2021-03-15T15:43:19+08:00">2021-03-15</time>
+                <time title="Modified: 2021-03-27 16:32:38" itemprop="dateModified" datetime="2021-03-27T16:32:38+08:00">2021-03-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -598,7 +598,7 @@
       
           <p>The Microsoft Authentication Library (MSAL) supports several authentication flows for use in different application scenarios.</p>
 <h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-authentication-flows#next-steps">Authentication flows</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-authentication-flows">Authentication flows</a></li>
 </ul>
 
       
@@ -717,7 +717,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-15 20:24:12" itemprop="dateModified" datetime="2021-03-15T20:24:12+08:00">2021-03-15</time>
+                <time title="Modified: 2021-03-27 16:51:41" itemprop="dateModified" datetime="2021-03-27T16:51:41+08:00">2021-03-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -766,7 +766,7 @@
 <li><strong>ID tokens</strong> - tokens that a client receives from the authorization server, used to sign in a user and get basic information about them.</li>
 <li><strong>Refresh tokens</strong> - used by a client to get new access and ID tokens over time. These are opaque strings, and are only understandable by the authorization server.</li>
 </ul>
-<h2 id="Authorization-Grant-Types"><a href="#Authorization-Grant-Types" class="headerlink" title="Authorization Grant Types"></a>Authorization Grant Types</h2><h3 id="Authorization-Code-Flow"><a href="#Authorization-Code-Flow" class="headerlink" title="Authorization Code Flow"></a>Authorization Code Flow</h3><p><img src="/images/tech/authentication/microsoft-identity-platform/microsoft-identity-auth-code-flow.png" alt="microsoft-identity-auth-code-flow"></p>
+<h2 id="Authorization-Grant-Types"><a href="#Authorization-Grant-Types" class="headerlink" title="Authorization Grant Types"></a>Authorization Grant Types</h2><h3 id="Authorization-Code-Grant-Flow"><a href="#Authorization-Code-Grant-Flow" class="headerlink" title="Authorization Code Grant Flow"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow">Authorization Code Grant Flow</a></h3><p><img src="/images/tech/authentication/microsoft-identity-platform/microsoft-identity-auth-code-flow.png" alt="microsoft-identity-auth-code-flow"></p>
 <blockquote>
 <p>// TOASK: How does Web API validate token??</p>
 </blockquote>
@@ -780,11 +780,15 @@
 
 </li>
 </ol>
-<h3 id="Authorization-Code-Flow-with-PKCE-for-SPA"><a href="#Authorization-Code-Flow-with-PKCE-for-SPA" class="headerlink" title="Authorization Code Flow (with PKCE) for SPA"></a>Authorization Code Flow (with PKCE) for SPA</h3><p><img src="/images/tech/authentication/microsoft-identity-platform/microsoft-identity-auth-code-flow-with-pkce.png" alt="microsoft-identity-auth-code-flow-with-pkce"></p>
+<h3 id="Authorization-Code-Flow-with-PKCE-for-SPA"><a href="#Authorization-Code-Flow-with-PKCE-for-SPA" class="headerlink" title="Authorization Code Flow (with PKCE) for SPA"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-third-party-cookies-spas">Authorization Code Flow (with PKCE) for SPA</a></h3><p><img src="/images/tech/authentication/microsoft-identity-platform/microsoft-identity-auth-code-flow-with-pkce.png" alt="microsoft-identity-auth-code-flow-with-pkce"></p>
 <blockquote>
 <p>// TOASK: Is it secure to use auth code in SPA when using PKCE?</p>
 </blockquote>
-<h3 id="Implicit"><a href="#Implicit" class="headerlink" title="Implicit"></a>Implicit</h3><h3 id="Resource-Owner-Password-Credentials"><a href="#Resource-Owner-Password-Credentials" class="headerlink" title="Resource Owner Password Credentials"></a>Resource Owner Password Credentials</h3><h3 id="Client-Credentials"><a href="#Client-Credentials" class="headerlink" title="Client Credentials"></a>Client Credentials</h3><h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>In our implementation, Tab app uses <strong>authorization code flow with PKCE</strong>.</p>
+<h3 id="Implicit-Grant-Flow"><a href="#Implicit-Grant-Flow" class="headerlink" title="Implicit Grant Flow"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow">Implicit Grant Flow</a></h3><ul>
+<li>Note: With the plans for <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-third-party-cookies-spas">third party cookies to be removed from browsers</a>, the implicit grant flow is no longer a suitable authentication method. authorization code flow is recommended for all new applications including SPAs.</li>
+</ul>
+<p><img src="/images/tech/authentication/microsoft-identity-platform/microsoft-identity-implicit-grant-flow.png" alt="microsoft-identity-implicit-grant-flow"></p>
+<h3 id="Resource-Owner-Password-Credentials"><a href="#Resource-Owner-Password-Credentials" class="headerlink" title="Resource Owner Password Credentials"></a>Resource Owner Password Credentials</h3><h3 id="Client-Credentials"><a href="#Client-Credentials" class="headerlink" title="Client Credentials"></a>Client Credentials</h3><h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>In our implementation, Tab app uses <strong>authorization code flow with PKCE</strong>.</p>
 <ol>
 <li>Tab App <em>frontend</em> gets auth code.<ol>
 <li>Frontend browser pop up login page (/public/auth-start.html).</li>
@@ -800,7 +804,6 @@
 <h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols">OAuth 2.0 and OpenID Connect protocols on the Microsoft identity platform</a></li>
 <li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/scenario-spa-overview">Scenario: Single-page application</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-third-party-cookies-spas">Single page apps using the authorization code flow</a></li>
 <li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow">Microsoft identity platform and OAuth 2.0 authorization code flow</a></li>
 </ul>
 
@@ -853,7 +856,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-27 13:32:50" itemprop="dateModified" datetime="2021-03-27T13:32:50+08:00">2021-03-27</time>
+                <time title="Modified: 2021-03-27 16:26:12" itemprop="dateModified" datetime="2021-03-27T16:26:12+08:00">2021-03-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1005,7 +1008,47 @@
 </li>
 </ul>
 <h3 id="Project-Trantision"><a href="#Project-Trantision" class="headerlink" title="Project Trantision"></a>Project Trantision</h3><p>When you are on a product transition process with other team, communication counts. This process usually includes cross-team communication and it is vital for your career reputation.</p>
-<h3 id="Say-Goodbye"><a href="#Say-Goodbye" class="headerlink" title="Say Goodbye"></a>Say Goodbye</h3><h3 id="Congratulations"><a href="#Congratulations" class="headerlink" title="Congratulations"></a>Congratulations</h3><h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
+<h3 id="Farewell"><a href="#Farewell" class="headerlink" title="Farewell"></a>Farewell</h3><blockquote>
+<p>Dear friends and colleagues,</p>
+<p>As some of you know, I’m going to move on to a different role outside of &lt;company-name&gt;, and my last day is Friday, August 30th. I’m a fan of &lt;company-name&gt; since I was 22 years old, and enjoying my job here after joined in &lt;company-name&gt; 5 years ago. So this is really a hard decision to me in this summer, I think the decision is in the best choice of my career goals and personal interesting, or it’s called ‘follow my heart’. </p>
+<p>5-years  is not a short period in a person’s life, but how lucky I am is joining this team and working with you guys! It’s really an incredible wonderful journey in my life! Learn and grow, enjoy everything here, and make a lot of good friends. So thank you everyone, it’s been so great working with you!</p>
+<p>It’s no goodbye but see you around, keep in touch!</p>
+<p>Sincerely,<br>xxx</p>
+</blockquote>
+<blockquote>
+<p>Hi,</p>
+<p>Today is my last day working in &lt;department-name&gt;. I will soon start another role in &lt;another-department-name&gt;, to continue to explore the IoT territory.</p>
+<p>It was still vivid to me the days and nights, smiles and tears we have been working on the &lt;project-A&gt;, &lt;project-B&gt;, &lt;project-C&gt; and all the products. Also I witness the growth of &lt;department-name&gt; that now we have multiple charts there. I was so thrilled to be part of this team. Thanks to all of you!</p>
+<p>Specially thanks to Bob my manager, who provided numerous helps and guides to me during the past 3.5 years, to shape me up as a good PM for the domain I worked. I learned a lot from you and pretty sure it will benefit for my next endeavor.</p>
+<p>I am still in the xxx domain, and we will also have lots of cross paths and collaborations in the near future. Looking forward to it.</p>
+<p>Thanks,<br>xxx</p>
+</blockquote>
+<blockquote>
+<p>Dear all,</p>
+<p>As some of you may know, I am leaving &lt;company-name&gt; and today is my last working day.<br>I started my career in &lt;company-name&gt; back from Mar 2010 and it is 10 years already. It is still vivid to me all the days and nights, smiles and tears we have gone through along the way, from &lt;project-A&gt; to &lt;project-B&gt;. I felt so lucky when getting offer from &lt;company-name&gt; in 2009, and I still feel the same today. </p>
+<p>Special thanks to my manager Alen and all SLTs, who give me all the opportunities in &lt;department-name&gt;, support me for the various decisions we have made, and encourage me to try something new. I’d like to say thank you to our PM team, especially Bob as well. We know each other for long time and started working together for several years. I really enjoy working with you and your team on various projects over the years. And thanks to all precious managers: Andrew, Eric, Tom and Mike. I cannot achieve so much without your help and guidance. </p>
+<p>I also want to say THANK YOU to all my current &amp; previous colleagues, and partner teams. It is a great journey working with you over the years. It’s the lifetime memory to me.</p>
+<p>Mobile and Wechat: xxxxxxxxxxx<br>Personal mail: <a href="mailto:xxx@outlook.com">xxx@outlook.com</a><br>Linkedin: <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/xxx/">https://www.linkedin.com/in/xxx/</a>  </p>
+<p>xxx<br>&lt;department-name&gt;</p>
+</blockquote>
+<blockquote>
+<p>Hi friends,</p>
+<p>Some of you may already know that I’ll explore new adventures outside &lt;company-name&gt; from next week. Today is my last day at &lt;company-name&gt;.</p>
+<p>I joined &lt;company-name&gt; after graduation in 2016. It’s my pleasure to start my career path from such a big company with many creative products. It’s also my fortune to work with so many talented teams and guys. Thanks Bob and &lt;department-name&gt; leadership team for giving me opportunity to work and improve myself in this comfortable environment.</p>
+<p>Special thanks to my manager Alen, who gave me a lot of help and guidance in my career development, which will equip me for whole career. A role model can help me lay out a career path that is realistic and practical. I believe my future career will benefit a lot from you.</p>
+<p>Also thanks for my mentor A, B and C. We’ve been working on different projects, I learnt a lot from you about how to face the challenges and strengthen talent. </p>
+<p>To my buddies in &lt;project-A&gt;(as well as PM team), &lt;project-B&gt;, &lt;project-C&gt;, it’s nice working with you. Thanks for great moment we spent during and off work.</p>
+<p>Thanks &lt;teammate-A&gt; for innovation and interesting ideas in all kinds of projects. Really enjoy the creative projects we worked together in IoT area.</p>
+<p>In the future, you can reach me via +86xxxxxxxxxxx (Wechat with same mobile). Let’s keep in touch.</p>
+<p>With best kind regards!</p>
+<p>xxx</p>
+</blockquote>
+<h3 id="Congratulations"><a href="#Congratulations" class="headerlink" title="Congratulations"></a>Congratulations</h3><ul>
+<li><code>Congratulations!</code></li>
+<li><code>Congratulations to you!</code></li>
+<li><code>Congrats to you!</code></li>
+</ul>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://www.wallstreetenglish.com/blog/how-to-write-formal-emails-in-english/">How to Write Formal Emails in English</a></li>
 </ul>
 
@@ -1181,7 +1224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-15 20:24:22" itemprop="dateModified" datetime="2021-03-15T20:24:22+08:00">2021-03-15</time>
+                <time title="Modified: 2021-03-27 17:17:30" itemprop="dateModified" datetime="2021-03-27T17:17:30+08:00">2021-03-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1269,7 +1312,28 @@
 <p>授权码（authorization code）方式，指的是第三方应用先申请一个授权码，然后再用该码获取令牌。</p>
 <p>这种方式是最常用的流程，安全性也最高，它适用于那些有后端的 Web 应用。授权码通过前端传送，令牌则是储存在后端，而且所有与资源服务器的通信都在后端完成。这样的前后端分离，可以避免令牌泄漏。</p>
 <p><img src="/images/tech/authentication/oauthv2-intro/auth_code_flow.png" alt="auth_code_flow"></p>
-<h3 id="Implicit"><a href="#Implicit" class="headerlink" title="Implicit"></a>Implicit</h3><h3 id="Resource-Owner-Password-Credentials"><a href="#Resource-Owner-Password-Credentials" class="headerlink" title="Resource Owner Password Credentials"></a>Resource Owner Password Credentials</h3><h3 id="Client-Credentials"><a href="#Client-Credentials" class="headerlink" title="Client Credentials"></a>Client Credentials</h3><h2 id="More-Read"><a href="#More-Read" class="headerlink" title="More Read"></a>More Read</h2><ul>
+<h4 id="Step-1-Authorization-Code-Link"><a href="#Step-1-Authorization-Code-Link" class="headerlink" title="Step 1: Authorization Code Link"></a>Step 1: Authorization Code Link</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cloud.digitalocean.com/v1/oauth/authorize?response_type=code&amp;client_id=CLIENT_ID&amp;redirect_uri=CALLBACK_URL&amp;scope=read</span><br></pre></td></tr></tbody></table></figure>
+<p>Here is an explanation of the link components:</p>
+<ul>
+<li><strong><a target="_blank" rel="noopener" href="https://cloud.digitalocean.com/v1/oauth/authorize">https://cloud.digitalocean.com/v1/oauth/authorize</a></strong>: the API authorization endpoint</li>
+<li><strong>client_id=client_id</strong>: the application’s client ID (how the API identifies the application)</li>
+<li><strong>redirect_uri=CALLBACK_URL</strong>: where the service redirects the user-agent after an authorization code is granted</li>
+<li><strong>response_type=code</strong>: specifies that your application is requesting an authorization code grant</li>
+<li><strong>scope=read</strong>: specifies the level of access that the application is requesting</li>
+</ul>
+<h4 id="Step-2-User-Authorizes-Application"><a href="#Step-2-User-Authorizes-Application" class="headerlink" title="Step 2: User Authorizes Application"></a>Step 2: User Authorizes Application</h4><p>When the user clicks the link, they must first log in to the service, to authenticate their identity (unless they are already logged in). Then they will be prompted by the service to authorize or deny the application access to their account.</p>
+<h4 id="Step-3-Application-Receives-Authorization-Code"><a href="#Step-3-Application-Receives-Authorization-Code" class="headerlink" title="Step 3: Application Receives Authorization Code"></a>Step 3: Application Receives Authorization Code</h4><p>If the user clicks “Authorize Application”, the service redirects the user-agent to the application redirect URI, which was specified during the client registration, along with an authorization code.</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://dropletbook.com/callback?code=AUTHORIZATION_CODE</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Step-4-Application-Requests-Access-Token"><a href="#Step-4-Application-Requests-Access-Token" class="headerlink" title="Step 4: Application Requests Access Token"></a>Step 4: Application Requests Access Token</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cloud.digitalocean.com/v1/oauth/token?client_id=CLIENT_ID&amp;client_secret=CLIENT_SECRET&amp;grant_type=authorization_code&amp;code=AUTHORIZATION_CODE&amp;redirect_uri=CALLBACK_URL</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Step-5-Application-Receives-Access-Token"><a href="#Step-5-Application-Receives-Access-Token" class="headerlink" title="Step 5: Application Receives Access Token"></a>Step 5: Application Receives Access Token</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{"access_token":"ACCESS_TOKEN","token_type":"bearer","expires_in":2592000,"refresh_token":"REFRESH_TOKEN","scope":"read","uid":100101,"info":{"name":"Mark E. Mark","email":"mark@thefunkybunch.com"}}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Implicit"><a href="#Implicit" class="headerlink" title="Implicit"></a>Implicit</h3><p>The implicit grant type is used for mobile apps and web applications (i.e. applications that run in a web browser), where the <em>client secret</em> confidentiality is not guaranteed. The implicit grant type is also a redirection-based flow but the access token is given to the user-agent to forward to the application, so it may be exposed to the user and other applications on the user’s device. Also, this flow does not authenticate the identity of the application, and relies on the redirect URI (that was registered with the service) to serve this purpose.</p>
+<p>The implicit grant type does not support refresh tokens.</p>
+<p>The implicit grant flow basically works as follows: the user is asked to authorize the application, then the authorization server passes the access token back to the user-agent, which passes it to the application. If you are curious about the details, read on.</p>
+<p>有些 Web 应用是纯前端应用，没有后端。这时就不能用上面的方式了，必须将令牌储存在前端。RFC 6749 就规定了第二种方式，允许直接向前端颁发令牌。这种方式没有授权码这个中间步骤，所以称为（授权码）”隐藏式”（implicit）。</p>
+<p><img src="/images/tech/authentication/oauthv2-intro/implicit_flow.png" alt="implicit_flow"></p>
+<h4 id="Step-1-Implicit-Authorization-Link"><a href="#Step-1-Implicit-Authorization-Link" class="headerlink" title="Step 1: Implicit Authorization Link"></a>Step 1: Implicit Authorization Link</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cloud.digitalocean.com/v1/oauth/authorize?response_type=token&amp;client_id=CLIENT_ID&amp;redirect_uri=CALLBACK_URL&amp;scope=read</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="Step-2-User-Authorizes-Application-1"><a href="#Step-2-User-Authorizes-Application-1" class="headerlink" title="Step 2: User Authorizes Application"></a>Step 2: User Authorizes Application</h4><p>注意，令牌的位置是 URL 锚点（fragment），而不是查询字符串（querystring），这是因为 OAuth 2.0 允许跳转网址是 HTTP 协议，因此存在”中间人攻击”的风险，而浏览器跳转时，锚点不会发到服务器，就减少了泄漏令牌的风险。</p>
+<h3 id="Resource-Owner-Password-Credentials"><a href="#Resource-Owner-Password-Credentials" class="headerlink" title="Resource Owner Password Credentials"></a>Resource Owner Password Credentials</h3><h3 id="Client-Credentials"><a href="#Client-Credentials" class="headerlink" title="Client Credentials"></a>Client Credentials</h3><h2 id="More-Read"><a href="#More-Read" class="headerlink" title="More Read"></a>More Read</h2><ul>
 <li><a href="/2021/03/11/tech/authentication/microsoft-identity-platform">Microsoft Identity Platform: OAuth 2.0</a></li>
 </ul>
 <h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>

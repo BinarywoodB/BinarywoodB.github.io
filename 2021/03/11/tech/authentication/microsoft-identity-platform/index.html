@@ -28,17 +28,18 @@
 <meta property="og:image" content="https://binarywoodb.github.io/images/tech/authentication/oauthv2-intro/oauthv2-microsoft-identity.png">
 <meta property="og:image" content="https://binarywoodb.github.io/images/tech/authentication/microsoft-identity-platform/microsoft-identity-auth-code-flow.png">
 <meta property="og:image" content="https://binarywoodb.github.io/images/tech/authentication/microsoft-identity-platform/microsoft-identity-auth-code-flow-with-pkce.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/authentication/microsoft-identity-platform/microsoft-identity-implicit-grant-flow.png">
 <meta property="article:published_time" content="2021-03-10T16:39:42.000Z">
-<meta property="article:modified_time" content="2021-03-15T12:24:12.708Z">
+<meta property="article:modified_time" content="2021-03-27T08:51:41.463Z">
 <meta property="article:author" content="Di Lin">
 <meta property="article:tag" content="Network">
-<meta property="article:tag" content="Protocol">
 <meta property="article:tag" content="Authentication">
 <meta property="article:tag" content="Authorization">
 <meta property="article:tag" content="OAuth 2.0">
+<meta property="article:tag" content="Protocol">
+<meta property="article:tag" content="Azure Activity Directory (AAD)">
 <meta property="article:tag" content="Microsoft Identity Platform">
 <meta property="article:tag" content="MSAL">
-<meta property="article:tag" content="Azure Activity Directory (AAD)">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://binarywoodb.github.io/images/tech/authentication/oauthv2-intro/oauthv2-microsoft-identity.png">
 
@@ -210,7 +211,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-15 20:24:12" itemprop="dateModified" datetime="2021-03-15T20:24:12+08:00">2021-03-15</time>
+                <time title="Modified: 2021-03-27 16:51:41" itemprop="dateModified" datetime="2021-03-27T16:51:41+08:00">2021-03-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,7 +260,7 @@
 <li><strong>ID tokens</strong> - tokens that a client receives from the authorization server, used to sign in a user and get basic information about them.</li>
 <li><strong>Refresh tokens</strong> - used by a client to get new access and ID tokens over time. These are opaque strings, and are only understandable by the authorization server.</li>
 </ul>
-<h2 id="Authorization-Grant-Types"><a href="#Authorization-Grant-Types" class="headerlink" title="Authorization Grant Types"></a>Authorization Grant Types</h2><h3 id="Authorization-Code-Flow"><a href="#Authorization-Code-Flow" class="headerlink" title="Authorization Code Flow"></a>Authorization Code Flow</h3><p><img src="/images/tech/authentication/microsoft-identity-platform/microsoft-identity-auth-code-flow.png" alt="microsoft-identity-auth-code-flow"></p>
+<h2 id="Authorization-Grant-Types"><a href="#Authorization-Grant-Types" class="headerlink" title="Authorization Grant Types"></a>Authorization Grant Types</h2><h3 id="Authorization-Code-Grant-Flow"><a href="#Authorization-Code-Grant-Flow" class="headerlink" title="Authorization Code Grant Flow"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow">Authorization Code Grant Flow</a></h3><p><img src="/images/tech/authentication/microsoft-identity-platform/microsoft-identity-auth-code-flow.png" alt="microsoft-identity-auth-code-flow"></p>
 <blockquote>
 <p>// TOASK: How does Web API validate token??</p>
 </blockquote>
@@ -273,11 +274,15 @@
 
 </li>
 </ol>
-<h3 id="Authorization-Code-Flow-with-PKCE-for-SPA"><a href="#Authorization-Code-Flow-with-PKCE-for-SPA" class="headerlink" title="Authorization Code Flow (with PKCE) for SPA"></a>Authorization Code Flow (with PKCE) for SPA</h3><p><img src="/images/tech/authentication/microsoft-identity-platform/microsoft-identity-auth-code-flow-with-pkce.png" alt="microsoft-identity-auth-code-flow-with-pkce"></p>
+<h3 id="Authorization-Code-Flow-with-PKCE-for-SPA"><a href="#Authorization-Code-Flow-with-PKCE-for-SPA" class="headerlink" title="Authorization Code Flow (with PKCE) for SPA"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-third-party-cookies-spas">Authorization Code Flow (with PKCE) for SPA</a></h3><p><img src="/images/tech/authentication/microsoft-identity-platform/microsoft-identity-auth-code-flow-with-pkce.png" alt="microsoft-identity-auth-code-flow-with-pkce"></p>
 <blockquote>
 <p>// TOASK: Is it secure to use auth code in SPA when using PKCE?</p>
 </blockquote>
-<h3 id="Implicit"><a href="#Implicit" class="headerlink" title="Implicit"></a>Implicit</h3><h3 id="Resource-Owner-Password-Credentials"><a href="#Resource-Owner-Password-Credentials" class="headerlink" title="Resource Owner Password Credentials"></a>Resource Owner Password Credentials</h3><h3 id="Client-Credentials"><a href="#Client-Credentials" class="headerlink" title="Client Credentials"></a>Client Credentials</h3><h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>In our implementation, Tab app uses <strong>authorization code flow with PKCE</strong>.</p>
+<h3 id="Implicit-Grant-Flow"><a href="#Implicit-Grant-Flow" class="headerlink" title="Implicit Grant Flow"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow">Implicit Grant Flow</a></h3><ul>
+<li>Note: With the plans for <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-third-party-cookies-spas">third party cookies to be removed from browsers</a>, the implicit grant flow is no longer a suitable authentication method. authorization code flow is recommended for all new applications including SPAs.</li>
+</ul>
+<p><img src="/images/tech/authentication/microsoft-identity-platform/microsoft-identity-implicit-grant-flow.png" alt="microsoft-identity-implicit-grant-flow"></p>
+<h3 id="Resource-Owner-Password-Credentials"><a href="#Resource-Owner-Password-Credentials" class="headerlink" title="Resource Owner Password Credentials"></a>Resource Owner Password Credentials</h3><h3 id="Client-Credentials"><a href="#Client-Credentials" class="headerlink" title="Client Credentials"></a>Client Credentials</h3><h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>In our implementation, Tab app uses <strong>authorization code flow with PKCE</strong>.</p>
 <ol>
 <li>Tab App <em>frontend</em> gets auth code.<ol>
 <li>Frontend browser pop up login page (/public/auth-start.html).</li>
@@ -293,7 +298,6 @@
 <h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols">OAuth 2.0 and OpenID Connect protocols on the Microsoft identity platform</a></li>
 <li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/scenario-spa-overview">Scenario: Single-page application</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-third-party-cookies-spas">Single page apps using the authorization code flow</a></li>
 <li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow">Microsoft identity platform and OAuth 2.0 authorization code flow</a></li>
 </ul>
 
@@ -306,13 +310,13 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Network/" rel="tag"># Network</a>
-              <a href="/tags/Protocol/" rel="tag"># Protocol</a>
               <a href="/tags/Authentication/" rel="tag"># Authentication</a>
               <a href="/tags/Authorization/" rel="tag"># Authorization</a>
               <a href="/tags/OAuth-2-0/" rel="tag"># OAuth 2.0</a>
+              <a href="/tags/Protocol/" rel="tag"># Protocol</a>
+              <a href="/tags/Azure-Activity-Directory-AAD/" rel="tag"># Azure Activity Directory (AAD)</a>
               <a href="/tags/Microsoft-Identity-Platform/" rel="tag"># Microsoft Identity Platform</a>
               <a href="/tags/MSAL/" rel="tag"># MSAL</a>
-              <a href="/tags/Azure-Activity-Directory-AAD/" rel="tag"># Azure Activity Directory (AAD)</a>
           </div>
 
         
@@ -386,7 +390,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Microsoft-Identity-Platform"><span class="nav-number">1.</span> <span class="nav-text">Microsoft Identity Platform</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Basics"><span class="nav-number">1.1.</span> <span class="nav-text">The Basics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#App-Registration"><span class="nav-number">1.2.</span> <span class="nav-text">App Registration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Endpoints"><span class="nav-number">1.3.</span> <span class="nav-text">Endpoints</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tokens"><span class="nav-number">1.4.</span> <span class="nav-text">Tokens</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Authorization-Grant-Types"><span class="nav-number">2.</span> <span class="nav-text">Authorization Grant Types</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Authorization-Code-Flow"><span class="nav-number">2.1.</span> <span class="nav-text">Authorization Code Flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Authorization-Code-Flow-with-PKCE-for-SPA"><span class="nav-number">2.2.</span> <span class="nav-text">Authorization Code Flow (with PKCE) for SPA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implicit"><span class="nav-number">2.3.</span> <span class="nav-text">Implicit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resource-Owner-Password-Credentials"><span class="nav-number">2.4.</span> <span class="nav-text">Resource Owner Password Credentials</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client-Credentials"><span class="nav-number">2.5.</span> <span class="nav-text">Client Credentials</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More-Read"><span class="nav-number">4.</span> <span class="nav-text">More Read</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ref"><span class="nav-number">5.</span> <span class="nav-text">Ref</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Microsoft-Identity-Platform"><span class="nav-number">1.</span> <span class="nav-text">Microsoft Identity Platform</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Basics"><span class="nav-number">1.1.</span> <span class="nav-text">The Basics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#App-Registration"><span class="nav-number">1.2.</span> <span class="nav-text">App Registration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Endpoints"><span class="nav-number">1.3.</span> <span class="nav-text">Endpoints</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tokens"><span class="nav-number">1.4.</span> <span class="nav-text">Tokens</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Authorization-Grant-Types"><span class="nav-number">2.</span> <span class="nav-text">Authorization Grant Types</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Authorization-Code-Grant-Flow"><span class="nav-number">2.1.</span> <span class="nav-text">Authorization Code Grant Flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Authorization-Code-Flow-with-PKCE-for-SPA"><span class="nav-number">2.2.</span> <span class="nav-text">Authorization Code Flow (with PKCE) for SPA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implicit-Grant-Flow"><span class="nav-number">2.3.</span> <span class="nav-text">Implicit Grant Flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resource-Owner-Password-Credentials"><span class="nav-number">2.4.</span> <span class="nav-text">Resource Owner Password Credentials</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client-Credentials"><span class="nav-number">2.5.</span> <span class="nav-text">Client Credentials</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More-Read"><span class="nav-number">4.</span> <span class="nav-text">More Read</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ref"><span class="nav-number">5.</span> <span class="nav-text">Ref</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
