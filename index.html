@@ -165,6 +165,389 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/07/07/tech/nodejs/delay-in-a-typescript-loop/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Di Lin">
+      <meta itemprop="description" content="Di Lin's personal blog">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di Lin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/tech/nodejs/delay-in-a-typescript-loop/" class="post-title-link" itemprop="url">Delay in a TypeScript Loop</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-07 10:30:16 / Modified: 11:19:37" itemprop="dateCreated datePublished" datetime="2021-07-07T10:30:16+08:00">2021-07-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/NodeJS/" itemprop="url" rel="index"><span itemprop="name">NodeJS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight typescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> finished: <span class="built_in">boolean</span> = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">let</span> result = doAJob().then(<span class="function">(<span class="params">jobResult</span>) =&gt;</span> {</span><br><span class="line">    finished = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> jobResult;</span><br><span class="line">});</span><br><span class="line">pollStatus();   <span class="comment">// poll job status while job not finised.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">pollStatus</span>(<span class="params"></span>): <span class="title">Promise</span>&lt;<span class="title">void</span>&gt; </span>{</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"polling status..."</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="keyword">async</span> () =&gt; {</span><br><span class="line">    <span class="comment">// call sdk to poll status and print</span></span><br><span class="line">    <span class="keyword">const</span> status = sdk.getStatus();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`status: <span class="subst">${status}</span>`</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!finished) {</span><br><span class="line">      pollStatus(); <span class="comment">// call loop again</span></span><br><span class="line">    }</span><br><span class="line">  }, <span class="number">10000</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/06/08/tech/cs-basis/computer-networking-notes/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Di Lin">
+      <meta itemprop="description" content="Di Lin's personal blog">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di Lin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/08/tech/cs-basis/computer-networking-notes/" class="post-title-link" itemprop="url">Computer Networking Notes</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-08 13:28:49" itemprop="dateCreated datePublished" datetime="2021-06-08T13:28:49+08:00">2021-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-07 11:20:33" itemprop="dateModified" datetime="2021-07-07T11:20:33+08:00">2021-07-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/CS-Basis/" itemprop="url" rel="index"><span itemprop="name">CS Basis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><h3 id="计算机网络的类别"><a href="#计算机网络的类别" class="headerlink" title="计算机网络的类别"></a>计算机网络的类别</h3><ul>
+<li><p>信息时代，网络指的是“三网”：</p>
+<ul>
+<li>电信网络（固化网+移动网）</li>
+<li>有线电视网络</li>
+<li>计算机网络</li>
+</ul>
+</li>
+<li><p>电路交换（circuit switching）：建立连接 -&gt; 通信 -&gt; 释放连接</p>
+<p>  <img src="/images/tech/cs-basis/circuit-switching.png" alt="circuit-switching"></p>
+<p>  缺点：电路中一个交换机或一条链路损坏则整个通信电路都要中断。</p>
+</li>
+<li><p>分组交换</p>
+</li>
+<li><p>三种交换方式的对比</p>
+<p>  <img src="/images/tech/cs-basis/switching-comparasion.png" alt="switching-comparasion"></p>
+</li>
+</ul>
+<h3 id="计算机网络的体系结构"><a href="#计算机网络的体系结构" class="headerlink" title="计算机网络的体系结构"></a>计算机网络的体系结构</h3><ul>
+<li><p>OSI vs TCP/IP</p>
+<p>  <img src="/images/tech/cs-basis/osi-tcpip.png" alt="osi-tcpip"></p>
+</li>
+<li><p>五层协议的体系结构</p>
+<p>  <img src="/images/tech/cs-basis/5-level-architecture.png" alt="5-level-architecture"></p>
+</li>
+</ul>
+<h2 id="物理层-Physical-Layer"><a href="#物理层-Physical-Layer" class="headerlink" title="物理层 Physical Layer"></a>物理层 Physical Layer</h2><h2 id="数据链路层-Data-Link-Layer"><a href="#数据链路层-Data-Link-Layer" class="headerlink" title="数据链路层 Data Link Layer"></a>数据链路层 Data Link Layer</h2><ul>
+<li><p>两种信道使用类型：</p>
+<ul>
+<li>点对点信道</li>
+<li>广播信道</li>
+</ul>
+</li>
+<li><p>数据链路层的简单模型</p>
+<p>  <img src="/images/tech/cs-basis/data-link-layer-model.png" alt="data-link-layer-model"></p>
+</li>
+<li><p>数据链路和帧</p>
+<ul>
+<li><strong>链路(link)</strong> 是一条无源的点到点的物理线路段，中间没有任何其他的交换结点。<ul>
+<li>一条链路只是一条通路的一个组成部分。</li>
+</ul>
+</li>
+<li><strong>数据链路(data link)</strong> 除了物理线路外，还必须有通信协议来控制这些数据的传输。若把实现这些协议的硬件和软件加到链路上，就构成了数据链路。<ul>
+<li>适配器（即网卡）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>三个基本问题：</p>
+<ul>
+<li><p>封装成帧（framing）</p>
+<p>  <img src="/images/tech/cs-basis/framing.png" alt="framing"></p>
+</li>
+<li><p>透明传输</p>
+<p>  <img src="/images/tech/cs-basis/transparent-transforming.png" alt="transparent-transforming"></p>
+</li>
+<li><p>差错控制</p>
+<p>  <img src="/images/tech/cs-basis/crc.png" alt="crc"></p>
+</li>
+</ul>
+</li>
+<li><p>点对点协议PPP(Point-to-Point Protocol)：全世界使用最多的数据链路层协议。</p>
+<p>  三个组成部分：</p>
+<ul>
+<li>一个将 IP 数据报封装到串行链路的方法</li>
+<li>链路控制协议 LCP (Link Control Protocol)</li>
+<li>网络控制协议 NCP (Network Control Protocol)</li>
+</ul>
+</li>
+<li><p>数据链路层的两个子层：</p>
+<ul>
+<li><p>逻辑链路控制 LLC (Logical Link Control)子层 （一般不考虑）</p>
+</li>
+<li><p>媒体接入控制 <strong>MAC (Medium Access Control)</strong> 子层</p>
+<ul>
+<li><p><strong>适配器</strong>：</p>
+<p>  网络接口板又称为通信适配器(adapter)或网络接口卡 NIC (Network Interface Card)，或“网卡”。 </p>
+<p>  适配器的重要功能：</p>
+<ul>
+<li><p>进行串行/并行转换。</p>
+</li>
+<li><p>对数据进行缓存。</p>
+</li>
+<li><p>实现以太网协议。</p>
+<p><img src="/images/tech/cs-basis/adapter.png" alt="adapter"></p>
+<p><img src="/images/tech/cs-basis/mac.png" alt="mac"></p>
+<p><img src="/images/tech/cs-basis/mac-frame.png" alt="mac-frame"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>载波监听多点接入/碰撞检测 CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</p>
+<p>  <img src="/images/tech/cs-basis/csma.png" alt="csma"></p>
+</li>
+<li><p>集线器</p>
+<p>  <img src="/images/tech/cs-basis/hub.png" alt="hub"></p>
+</li>
+<li><p>网桥 bridge</p>
+<p>  <img src="/images/tech/cs-basis/bridge.png" alt="bridge"></p>
+</li>
+</ul>
+<h2 id="网络层-Network-layer"><a href="#网络层-Network-layer" class="headerlink" title="网络层 Network layer"></a>网络层 Network layer</h2><ul>
+<li><p>网络层向上只提供简单灵活的、<strong>无连接的</strong>、<strong>尽最大努力交付</strong>的<strong>数据报服务</strong>。</p>
+</li>
+<li><p>IP协议及配套协议</p>
+<p>  <img src="/images/tech/cs-basis/ip.png" alt="ip"></p>
+</li>
+<li><p>中间设备又称为中间系统或中继(relay)系统。</p>
+<ul>
+<li>物理层中继系统：转发器(repeater)</li>
+<li>数据链路层中继系统：网桥或桥接器(bridge)</li>
+<li>网络层中继系统：路由器(router)</li>
+<li>网桥和路由器的混合物：桥路器(brouter)</li>
+<li>网络层以上的中继系统：网关(gateway)</li>
+</ul>
+</li>
+<li><p>IP数据报</p>
+<p>  <img src="/images/tech/cs-basis/ip-datagram.png" alt="ip-datagram"></p>
+</li>
+<li><p>IP地址<br>  <img src="/images/tech/cs-basis/ip-address.png" alt="ip-address"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/05/27/work/work-milestone/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Di Lin">
+      <meta itemprop="description" content="Di Lin's personal blog">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di Lin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/27/work/work-milestone/" class="post-title-link" itemprop="url">Work Milestone</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-05-27 13:12:02 / Modified: 13:18:54" itemprop="dateCreated datePublished" datetime="2021-05-27T13:12:02+08:00">2021-05-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Work/" itemprop="url" rel="index"><span itemprop="name">Work</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="May-25th-Microsoft-Teams-Toolkit-Public-Preview"><a href="#May-25th-Microsoft-Teams-Toolkit-Public-Preview" class="headerlink" title="May 25th Microsoft Teams Toolkit Public Preview"></a>May 25th Microsoft Teams Toolkit Public Preview</h2><ol>
+<li><p>Public Product:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/OfficeDev/TeamsFx/releases/tag/latest">VS Code extension 2.0.1​</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@microsoft/teamsfx-cli">CLI 0.1.1​</a></li>
+<li>VS extension​</li>
+<li>Tutorial docs​</li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/javascript/api/@microsoft/teamsfx/?view=msteams-client-js-latest">API docs​</a></li>
+</ul>
+</li>
+<li><p>//Build (301 sessions, 80+ has “Teams”)​</p>
+<ul>
+<li>Section:<ul>
+<li><a target="_blank" rel="noopener" href="https://mybuild.microsoft.com/sessions/2915b9b6-6b45-430a-9df7-2671318e2161?source=sessions">Build the next generation of collaborative apps for hybrid work​</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybuild.microsoft.com/sessions/f6840f12-8014-4ce1-a964-38adde783205?source=sessions">Ask the Experts: Developer tools for building apps on Microsoft Teams and enabling app adoption​</a></li>
+</ul>
+</li>
+<li>Blog:<ul>
+<li><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/microsoft-365/blog/2021/05/25/build-the-next-generation-of-collaborative-apps-for-hybrid-work/">Build the next generation of collaborative apps for hybrid work</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Baseline data of Teams apps</p>
+<ul>
+<li>Teams active users​<ul>
+<li>DAU: ~140M​</li>
+<li>MAU: ~240M​</li>
+</ul>
+</li>
+<li>Total apps: 80k​</li>
+<li>In the past 9 months​<ul>
+<li>Apps published: 30.5k​</li>
+<li>Apps approved: 19.1k​</li>
+</ul>
+</li>
+<li>In the past 3 months:​<ul>
+<li>Apps created by toolkit v1: 10k​</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/04/23/tech/toolkit/microsoft-learning-resource/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -825,385 +1208,6 @@
   
   
 
-      
-  
-  
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/03/26/tech/toolkit/npm-toolkit/">
-
-    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Di Lin">
-      <meta itemprop="description" content="Di Lin's personal blog">
-    </span>
-
-    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Di Lin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/26/tech/toolkit/npm-toolkit/" class="post-title-link" itemprop="url">Npm Toolkit</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-26 12:59:42" itemprop="dateCreated datePublished" datetime="2021-03-26T12:59:42+08:00">2021-03-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-30 10:04:02" itemprop="dateModified" datetime="2021-03-30T10:04:02+08:00">2021-03-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/Toolkit/" itemprop="url" rel="index"><span itemprop="name">Toolkit</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p><code>npm install</code> fail with unknown reason.</p>
-<p> Try clean the cache before installation:</p>
- <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Clean cache</span></span><br><span class="line">rm -rf node_modules</span><br><span class="line">rm package-lock.json</span><br><span class="line">npm cache clean -f</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install packages</span></span><br><span class="line">npm i</span><br><span class="line"></span><br><span class="line"><span class="comment"># Check npm packages version</span></span><br><span class="line">npm outdated</span><br><span class="line"></span><br><span class="line"><span class="comment"># Update pacakges</span></span><br><span class="line">npm update</span><br></pre></td></tr></tbody></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/03/22/tech/toolkit/uml-class-diagram/">
-
-    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Di Lin">
-      <meta itemprop="description" content="Di Lin's personal blog">
-    </span>
-
-    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Di Lin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/22/tech/toolkit/uml-class-diagram/" class="post-title-link" itemprop="url">UML Class Diagram</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-03-22 11:08:13 / Modified: 15:24:57" itemprop="dateCreated datePublished" datetime="2021-03-22T11:08:13+08:00">2021-03-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/Toolkit/" itemprop="url" rel="index"><span itemprop="name">Toolkit</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>The UML Class diagram is a graphical notation used to construct and visualize object oriented systems. A class diagram in the <strong>Unified Modeling Language (UML)</strong> is a type of static structure diagram that describes the structure of a system by showing the system’s:</p>
-<ul>
-<li>classes</li>
-<li>their attributes</li>
-<li>operations (or methods)</li>
-<li>and the relationships among objects.</li>
-</ul>
-<h2 id="UML-Class-Notation"><a href="#UML-Class-Notation" class="headerlink" title="UML Class Notation"></a>UML Class Notation</h2><p>A class represent a concept which encapsulates state (<strong>attributes</strong>) and behavior (<strong>operations</strong>). Each attribute has a type. Each <strong>operation</strong> has a <strong>signature</strong>. The class name is the <strong>only mandatory information</strong>.</p>
-<p><img src="/images/tech/toolkit/uml-class-diagram/02-class-notation.png" alt="02-class-notation.png"></p>
-<h3 id="Class-Visibility"><a href="#Class-Visibility" class="headerlink" title="Class Visibility"></a>Class Visibility</h3><p>The <code>+</code>, <code>-</code> and <code>#</code> symbols before an attribute and operation name in a class denote the visibility of the attribute and operation.</p>
-<p><img src="/images/tech/toolkit/uml-class-diagram/04-class-attributes-with-different-visibility.png" alt="04-class-attributes-with-different-visibility.png"></p>
-<ul>
-<li><code>+</code> denotes public attributes or operations</li>
-<li><code>-</code> denotes private attributes or operations</li>
-<li><code>#</code> denotes protected attributes or operations</li>
-</ul>
-<h3 id="Parameter-Directionality"><a href="#Parameter-Directionality" class="headerlink" title="Parameter Directionality"></a>Parameter Directionality</h3><p>Each parameter in an operation (method) may be denoted as <strong>in</strong>, <strong>out</strong> or <strong>inout</strong> which specifies its direction with respect to the caller. This directionality is shown before the parameter name.</p>
-<p><img src="/images/tech/toolkit/uml-class-diagram/05-parameter-directionality.png" alt="05-parameter-directionality.png"></p>
-<h2 id="Perspectives-of-Class-Diagram"><a href="#Perspectives-of-Class-Diagram" class="headerlink" title="Perspectives of Class Diagram"></a>Perspectives of Class Diagram</h2><p>The choice of perspective depends on how far along you are in the development process. During the formulation of a <em>domain model</em>, for example, you would seldom move past the <strong>conceptual perspective</strong>. <em>Analysis models</em> will typically feature a mix of <strong>conceptual and specification perspectives</strong>. <em>Design model development</em> will typically start with heavy emphasis on the <strong>specification perspective</strong>, and evolve into the <strong>implementation perspective</strong>.</p>
-<p>A diagram can be interpreted from various perspectives:</p>
-<ul>
-<li><strong>Conceptual</strong>: represents the concepts in the domain</li>
-<li><strong>Specification</strong>: focus is on the interfaces of Abstract Data Type (ADTs) in the software</li>
-<li><strong>Implementation</strong>: describes how classes will implement their interfaces</li>
-</ul>
-<p>The perspective affects the amount of detail to be supplied and the kinds of relationships worth presenting. As we mentioned above, the class name is the only mandatory information.</p>
-<p><img src="/images/tech/toolkit/uml-class-diagram/06-perspective-of-class-diagram.png" alt="06-perspective-of-class-diagram.png"></p>
-<h2 id="Relationships-between-classes"><a href="#Relationships-between-classes" class="headerlink" title="Relationships between classes"></a>Relationships between classes</h2><p>类的关系有泛化(Generalization)、实现(Realization)、依赖(Dependency)和关联(Association)。其中关联又分为一般关联关系和聚合关系(Aggregation), 合成关系(Composition)。</p>
-<p><img src="/images/tech/toolkit/uml-class-diagram/07-relationships-between-classes.png" alt="07-relationships-between-classes.png"></p>
-<blockquote>
-<p>虚线箭头指向依赖；<br>实线箭头指向关联；<br>虚线三角指向接口；<br>实线三角指向父类；<br>空心菱形能分离而独立存在，是聚合；<br>实心菱形精密关联不可分，是组合；</p>
-</blockquote>
-<ol>
-<li><p><strong>泛化(generalization)</strong> ：表示 <strong>is-a</strong> 的关系，是对象之间耦合度最大的一种关系，子类继承父类的所有细节。直接使用语言中的继承表达。在类图中使用带三角箭头的实线表示，箭头从子类指向父类。</p>
-<p> <img src="/images/tech/toolkit/uml-class-diagram/inheritance.png" alt="inheritance"></p>
-<ul>
-<li>An abstract class name is shown in italics.</li>
-</ul>
-</li>
-<li><p><strong>实现(Realization)</strong>:在类图中就是接口和实现的关系。在类图中使用带三角箭头的虚线表示，箭头从实现类指向接口。</p>
-<p> <img src="/images/tech/toolkit/uml-class-diagram/realization.png" alt="realization"></p>
-</li>
-<li><p><strong>依赖(Dependency)</strong> ：对象之间最弱的一种关联方式，是临时性的关联。代码中一般指由局部变量、函数参数、返回值建立的对于其他对象的调用关系。一个类调用被依赖类中的某些方法而得以完成这个类的一些职责。在类图使用带箭头的虚线表示，箭头从使用类指向被依赖的类。</p>
-<p> <img src="/images/tech/toolkit/uml-class-diagram/15-dependency-example.png" alt="15-dependency-example.png"><br> <img src="/images/tech/toolkit/uml-class-diagram/dependency.jpg" alt="dependency"></p>
-</li>
-<li><p><strong>关联(Association)</strong>: 对象之间一种引用关系，比如客户类与订单类之间的关系。这种关系通常使用类的属性表达。关联又分为一般关联、聚合关联与组合关联。</p>
-<ol>
-<li><p>一般关联。在类图使用带箭头的实线表示，箭头从使用类指向被关联的类。可以是单向和双向。</p>
-<p> <img src="/images/tech/toolkit/uml-class-diagram/association.png" alt="association"><br> <img src="/images/tech/toolkit/uml-class-diagram/association02.jpg" alt="association02"></p>
-</li>
-<li><p><strong>聚合(Aggregation)</strong> ：表示 <strong>has-a</strong> 的关系，是一种不稳定的包含关系。较强于一般关联,有整体与局部的关系,并且没有了整体,局部也可单独存在。如公司和员工的关系，公司包含员工，但如果公司倒闭，员工依然可以换公司。在类图使用空心的菱形表示，菱形从局部指向整体。</p>
-<p> <img src="/images/tech/toolkit/uml-class-diagram/aggregation.jpg" alt="aggregation"></p>
-</li>
-<li><p><strong>组合(Composition)</strong> ：表示 <strong>contains-a</strong> 的关系，是一种强烈的包含关系。组合类负责被组合类的生命周期。是一种更强的聚合关系。部分不能脱离整体存在。如公司和部门的关系，没有了公司，部门也不能存在了；调查问卷中问题和选项的关系；订单和订单选项的关系。在类图使用实心的菱形表示，菱形从局部指向整体。<br> <img src="/images/tech/toolkit/uml-class-diagram/composition.jpg" alt="composition"></p>
-<p>Cardinality is expressed in terms of:</p>
-<ul>
-<li>one to one</li>
-<li>one to many</li>
-<li>many to many</li>
-</ul>
-<p><img src="/images/tech/toolkit/uml-class-diagram/11-associations-with-different-multiplicies.png" alt="11-associations-with-different-multiplicies.png"></p>
-<p>多重性(Multiplicity) : 通常在关联、聚合、组合中使用。就是代表有多少个关联对象存在。使用数字..星号（数字）表示。如下图，一个割接通知可以关联0个到N个故障单。<br><img src="/images/tech/toolkit/uml-class-diagram/multiplicity.jpg" alt="multiplicity"></p>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="Relationship-Discrimination"><a href="#Relationship-Discrimination" class="headerlink" title="Relationship Discrimination"></a>Relationship Discrimination</h2><h3 id="聚合和组合的区别"><a href="#聚合和组合的区别" class="headerlink" title="聚合和组合的区别"></a>聚合和组合的区别</h3><p>聚合关系是“has-a”关系，组合关系是“contains-a”关系；聚合关系表示整体与部分的关系比较弱，而组合比较强；聚合关系中代表部分事物的对象与代表聚合事物的对象的生存期无关，一旦删除了聚合对象不一定就删除了代表部分事物的对象。组合中一旦删除了组合对象，同时也就删除了代表部分事物的对象。</p>
-<h3 id="依赖和关联的区别"><a href="#依赖和关联的区别" class="headerlink" title="依赖和关联的区别"></a>依赖和关联的区别</h3><ul>
-<li><p>依赖（Dependency）</p>
-<p>  从字面理解的话，是说一个类用到了另一个类。这种使用关系是具有偶然性的、临时性的、非常弱的。比如下图中的依赖关系，司机开车，要依赖车。在代码上表现的话一般为函数参数，或者局部变量或者对静态方法的调用。注意依赖关系只能是单向的，并且依赖关系强调的是 <strong>使用上的关系</strong>。</p>
-</li>
-<li><p>关联（Association）</p>
-<ul>
-<li>关联关系强调的是一种<strong>结构上的关系</strong></li>
-<li>他可以是<strong>单向的或者双向</strong>的</li>
-<li>从语义级别(上下文)可以分为聚合和组合，在代码实现上关联和聚合是很像的，主要区别在语义上</li>
-<li>一般来说双方关系是平等的，比如我和我的朋友</li>
-<li>在java语言上一般表现为全局变量。如person类和company类,顾客和地址,客户和订单</li>
-</ul>
-</li>
-</ul>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p><img src="/images/tech/toolkit/uml-class-diagram/sum.jpg" alt="sum"></p>
-<h2 id="Software-to-Draw-UML-Class-Diagram"><a href="#Software-to-Draw-UML-Class-Diagram" class="headerlink" title="Software to Draw UML Class Diagram"></a>Software to Draw UML Class Diagram</h2><ul>
-<li>Visio</li>
-<li>Enterprise Architect</li>
-<li>Rose</li>
-</ul>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-class-diagram-tutorial/">UML Class Diagram Tutorial</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.shuzhiduo.com/A/WpdK40kozV/">最清晰易懂的UML类图与类的关系详解</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/03/15/tech/nodejs/npm-dependency-resolution/">
-
-    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Di Lin">
-      <meta itemprop="description" content="Di Lin's personal blog">
-    </span>
-
-    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Di Lin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/15/tech/nodejs/npm-dependency-resolution/" class="post-title-link" itemprop="url">Understanding Npm Dependency Resolution</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-03-15 15:56:45 / Modified: 18:32:37" itemprop="dateCreated datePublished" datetime="2021-03-15T15:56:45+08:00">2021-03-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/NodeJS/" itemprop="url" rel="index"><span itemprop="name">NodeJS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="NPM-Dependency-Management-Model"><a href="#NPM-Dependency-Management-Model" class="headerlink" title="NPM Dependency Management Model"></a>NPM Dependency Management Model</h2><h3 id="Dependency-Resolution"><a href="#Dependency-Resolution" class="headerlink" title="Dependency Resolution"></a>Dependency Resolution</h3><p>npm3 resolves dependencies differently than npm2.</p>
-<p>While npm2 installs all dependencies in a <strong>nested way</strong>, npm3 tries to mitigate the deep trees and redundancy that such nesting causes. npm3 attempts this by installing some secondary dependencies (dependencies of dependencies) in a <strong>flat way</strong>, in the same directory as the primary dependency that requires it.</p>
-<p>Imagine we have a module, A. A requires B.<br><img src="/images/tech/nodejs/npm-dependency-resolution/a-require-b.png" alt="a require b"></p>
-<p>Now, let’s create an application that requires module A.</p>
-<p><img src="/images/tech/nodejs/npm-dependency-resolution/npm3deps2.png" alt="npm3deps2"></p>
-<p>Now, let’s say we want to require another module, C. C requires B, but at another version than A.</p>
-<p><img src="/images/tech/nodejs/npm-dependency-resolution/npm3deps3.png" alt="npm3deps3"></p>
-<p>However, since B v1.0 is already a top-level dep, we cannot install B v2.0 as a top level dependency. npm v3 handles this by defaulting to npm v2 behavior and nesting the new, different, module B version dependency under the module that requires it – in this case, module C.</p>
-<p><img src="/images/tech/nodejs/npm-dependency-resolution/npm3deps4.png" alt="npm3deps4"></p>
-<p><img src="/images/tech/nodejs/npm-dependency-resolution/tree.png" alt="tree"><br>Noted that you can list the dependencies and still see their relationships using <code>npm ls</code>.</p>
-<p>If you want to just see your primary dependencies, you can use:</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm ls --depth=0</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="/images/tech/nodejs/npm-dependency-resolution/npmlsdepth0.png" alt="npmlsdepth0"></p>
-<h3 id="Duplication-and-Deduping"><a href="#Duplication-and-Deduping" class="headerlink" title="Duplication and Deduping"></a>Duplication and Deduping</h3><p>See <a target="_blank" rel="noopener" href="http://npm.github.io/npm-like-im-5/npm3/duplication.html">Duplication and Deduping</a> article for better illustration.</p>
-<p>Use <code>npm dedupe</code> to get rid of duplication.</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm dedupe</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li><p>Before dedupe</p>
-<p>  <img src="/images/tech/nodejs/npm-dependency-resolution/npm3deps12.png" alt="npm3deps12"></p>
-</li>
-<li><p>After dedupe</p>
-<p>  <img src="/images/tech/nodejs/npm-dependency-resolution/npm3deps13.png" alt="npm3deps13"></p>
-</li>
-</ul>
-<h2 id="Comparision-with-Other-Package-Management-Models"><a href="#Comparision-with-Other-Package-Management-Models" class="headerlink" title="Comparision with Other Package Management Models"></a>Comparision with Other Package Management Models</h2><p>At a high level, npm is not too dissimilar from other package managers for programming languages: packages depend on other packages, and they express those dependencies with <em>version ranges</em>. npm happens to use the semver versioning scheme to express those ranges, but the way it performs version resolution is mostly immaterial; what matters is that <strong>packages can depend on ranges rather than specific versions of packages</strong>.</p>
-<p>Npm installs a <em>tree</em> of dependencies. That is, every package installed gets its own set of dependencies rather than forcing every package to share the same canonical set of packages.</p>
-<p>For example, consider two packages, <code>foo</code> and <code>bar</code>. Each of them have their own set of dependencies, which can be represented as a tree:</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">foo</span><br><span class="line">├── hello ^0.1.2</span><br><span class="line">└── world ^1.0.7</span><br><span class="line"></span><br><span class="line">bar</span><br><span class="line">├── hello ^0.2.8</span><br><span class="line">└── goodbye ^3.4.0</span><br></pre></td></tr></tbody></table></figure>
-<p>Most package managers (including RubyGems/Bundler, pip, and Cabal) would simply barf here, reporting a <strong>version conflict</strong>. This is because, <strong>in most package management models, only one version of any particular package can be installed at a time.</strong></p>
-<p>In contrast, npm has a somewhat easier job: it’s totally okay with installing different versions of the same package because each package gets its own set of dependencies. In the aforementioned example, the resulting directory structure would look something like this:</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">node_modules/</span><br><span class="line">├── foo/</span><br><span class="line">│   └── node_modules/</span><br><span class="line">│       ├── hello/</span><br><span class="line">│       └── world/</span><br><span class="line">└── bar/</span><br><span class="line">    └── node_modules/</span><br><span class="line">        ├── hello/</span><br><span class="line">        └── goodbye/</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="Pros"><a href="#Pros" class="headerlink" title="Pros"></a>Pros</h3><ol>
-<li><p>Extremely simple model but get pretty messy quickly.</p>
-<p> Notably,the directory structure very closely mirrors the actual dependency tree. The above diagram is something of a simplification: in practice, each transitive dependency would have its own node_modules directory and so on, but the directory structure can get pretty messy pretty quickly. </p>
-</li>
-<li><p>Avoid “Dependency Hell”.</p>
-<p> The npm model of package management is more complicated than that of other languages, but it provides a real advantage: implementation details are kept as implementation details. In other systems, it’s quite possible to find yourself in “dependency hell”, when you personally know that the version conflict reported by your package manager is not a real problem, but because the package system must pick a single canonical version, there’s no way to make progress without adjusting code in your dependencies. This is extremely frustrating.</p>
-</li>
-</ol>
-<h3 id="Cons"><a href="#Cons" class="headerlink" title="Cons"></a>Cons</h3><ol>
-<li><p>Larger code size. Worse performance.</p>
-<p> Given the potential for many, many copies of the same package, all with different versions. An increase in code size can often mean more than just a larger program—it can have a significant impact on performance. Larger programs just don’t fit into CPU caches as easily, and merely having to page a program in and out can significantly slow things down. That’s mostly just a tradeoff, though, since you’re sacrificing performance, not program correctness.</p>
-</li>
-<li><p><strong>Dependency isolation can affect cross-package communication.</strong></p>
-<p> See this <a target="_blank" rel="noopener" href="https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/#dependency-isolation-and-values-that-pass-package-boundaries">Dependency isolation and values that pass package boundaries</a> section for detailed illustration.</p>
-<p> An failure example: <a target="_blank" rel="noopener" href="https://github.com/microsoft/botbuilder-js/issues/3342">Dialog will break if two version of botbuilder-dialog package exists</a></p>
-</li>
-</ol>
-<h2 id="PeerDependency"><a href="#PeerDependency" class="headerlink" title="PeerDependency"></a>PeerDependency</h2><p><strong>PeerDependency</strong>: Rather than getting its own copy of a peer dependency, a package expects that dependency to be provided by its dependent.</p>
-<p>The peerDependencies requires <code>npm v7</code>. For <code>npm &gt;= 3 and npm &lt;= 6</code>, peerDependencies can be declared but will not be automatically checked and installed.<br>That is to say, to leverage the peerDependencies feature, we will need to migrate to npm v7 as well as requiring user to update to npm v7.</p>
-<ul>
-<li><p>Node:</p>
-<ul>
-<li>LTS: 14.16.0 (includes npm 6.14.11)</li>
-<li>Current: 15.10.0 (includes npm 7.5.3)</li>
-</ul>
-</li>
-</ul>
-<p>Though node use npm v7 as the current version, the majority will be using npm v6 in 2021. Consider the population, asking user to update to npm v7 adds a new pre-requisite.</p>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://npm.github.io/npm-like-im-5/npm3/dependency-resolution.html">Npm GitBook: Dependency Resolution</a></li>
-<li><a target="_blank" rel="noopener" href="http://npm.github.io/npm-like-im-5/npm3/duplication.html">Npm GitBook: Duplication and Deduping</a></li>
-<li><a target="_blank" rel="noopener" href="https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/">Understanding the npm dependency model</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1274,20 +1278,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">72</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

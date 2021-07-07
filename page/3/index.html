@@ -165,6 +165,413 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/03/08/tech/authentication/ssl-tls-protocol/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Di Lin">
+      <meta itemprop="description" content="Di Lin's personal blog">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di Lin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/08/tech/authentication/ssl-tls-protocol/" class="post-title-link" itemprop="url">SSL/TLS Handshake Protocol</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-08 17:08:25" itemprop="dateCreated datePublished" datetime="2021-03-08T17:08:25+08:00">2021-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-15 20:23:33" itemprop="dateModified" datetime="2021-03-15T20:23:33+08:00">2021-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Authentication/" itemprop="url" rel="index"><span itemprop="name">Authentication</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="SSL-TLS-Operation-Layer"><a href="#SSL-TLS-Operation-Layer" class="headerlink" title="SSL/TLS Operation Layer"></a>SSL/TLS Operation Layer</h2><p><img src="/images/tech/authentication/ssl-tls-protocol/operation-layer.png" alt="operation-layer"></p>
+<p>The SSL/TLS protocol operates on:</p>
+<ul>
+<li><strong>Application / Presentation / Session</strong> layers of OSI model</li>
+<li><strong>Application</strong> layer of TCP/IP model</li>
+</ul>
+<h2 id="SSL-TLS-Handshake-Process"><a href="#SSL-TLS-Handshake-Process" class="headerlink" title="SSL/TLS Handshake Process"></a>SSL/TLS Handshake Process</h2><p><img src="/images/tech/authentication/ssl-tls-protocol/handshake-all.png" alt="handshake-all"></p>
+<h3 id="Step-1-ClientHello"><a href="#Step-1-ClientHello" class="headerlink" title="Step 1 ClientHello"></a>Step 1 ClientHello</h3><p><img src="/images/tech/authentication/ssl-tls-protocol/step1.png" alt="step1"></p>
+<h3 id="Step-2-ServerHello"><a href="#Step-2-ServerHello" class="headerlink" title="Step 2 ServerHello"></a>Step 2 ServerHello</h3><p><img src="/images/tech/authentication/ssl-tls-protocol/step2.png" alt="step2"></p>
+<h3 id="Step-3-Verify-Digital-Certificate"><a href="#Step-3-Verify-Digital-Certificate" class="headerlink" title="Step 3 Verify Digital Certificate"></a>Step 3 Verify Digital Certificate</h3><p><img src="/images/tech/authentication/ssl-tls-protocol/step3.png" alt="step3"><br>The client will contact the server’s CA(certificate authority) and verify the server’s <a href="/2021/03/08/tech/authentication/digital-signature-and-digital-certificate"><strong>digital certificate</strong></a>, thus confirming the authenticity of the web server.<br>GOAL: Establishing the trust on the web server.</p>
+<h3 id="Step-4-ClientKeyExchange"><a href="#Step-4-ClientKeyExchange" class="headerlink" title="Step 4 ClientKeyExchange"></a>Step 4 ClientKeyExchange</h3><p><img src="/images/tech/authentication/ssl-tls-protocol/step4.png" alt="step4"></p>
+<h3 id="Step-5-Finished-client"><a href="#Step-5-Finished-client" class="headerlink" title="Step 5 Finished(client)"></a>Step 5 Finished(client)</h3><p><img src="/images/tech/authentication/ssl-tls-protocol/step5.png" alt="step5"></p>
+<h3 id="Step-6-Finished-server"><a href="#Step-6-Finished-server" class="headerlink" title="Step 6 Finished(server)"></a>Step 6 Finished(server)</h3><p><img src="/images/tech/authentication/ssl-tls-protocol/step6.png" alt="step6"></p>
+<h3 id="Step-7-Handshake-Done-Exchanged-Message"><a href="#Step-7-Handshake-Done-Exchanged-Message" class="headerlink" title="Step 7 Handshake Done. Exchanged Message"></a>Step 7 Handshake Done. Exchanged Message</h3><p><img src="/images/tech/authentication/ssl-tls-protocol/step7.png" alt="step7"><br>Once the handshake is done, the server and client can now exchange messages that are symmetrically encrypted with the shared secret key.</p>
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><ol>
+<li>The above process demonstrates how <strong>asymmetric key algorithm</strong> and <strong>symmetric key algorithm</strong> work together.</li>
+</ol>
+<ul>
+<li><strong>Asymmetric key algorithm (public key &amp; private key)</strong> is used to verify the identity of the owner and its public key so that trust is built.</li>
+<li>Once the connection is established, <strong>Symmetric key algorithm (shared key)</strong> is used to encrypt and decrypt all traffic between them.</li>
+</ul>
+<ol start="2">
+<li><p>The green padlock: indicates that the web server’s public key really belongs to the web server, not someone else.</p>
+</li>
+<li><p>The <code>Https</code> and the green padlock only indicates the communications between client and server are encrypted. It does not says the website is “safe and good”.</p>
+</li>
+</ol>
+<h2 id="More-Read"><a href="#More-Read" class="headerlink" title="More Read"></a>More Read</h2><ul>
+<li><a href="/2021/03/08/tech/authentication/digital-signature-and-digital-certificate">Digital Signature &amp; Digital Certificate</a></li>
+<li><a href="/2021/03/08/tech/authentication/http-https-ssl-tls">SSL, TLS, HTTP, HTTPS Explained</a></li>
+</ul>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sEkw8ZcxtFk">SSL/TLS handshake Protocol</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/03/08/tech/authentication/http-https-ssl-tls/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Di Lin">
+      <meta itemprop="description" content="Di Lin's personal blog">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di Lin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/08/tech/authentication/http-https-ssl-tls/" class="post-title-link" itemprop="url">SSL, TLS, HTTP, HTTPS Explained</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-08 17:00:20" itemprop="dateCreated datePublished" datetime="2021-03-08T17:00:20+08:00">2021-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-15 20:23:59" itemprop="dateModified" datetime="2021-03-15T20:23:59+08:00">2021-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Authentication/" itemprop="url" rel="index"><span itemprop="name">Authentication</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><h3 id="HTTP-Hypertext-Transfer-Protocol"><a href="#HTTP-Hypertext-Transfer-Protocol" class="headerlink" title="HTTP: Hypertext Transfer Protocol"></a>HTTP: Hypertext Transfer Protocol</h3><ul>
+<li>Clear text</li>
+<li>Vulnerable to hackers</li>
+</ul>
+<h3 id="HTTPS-Secure-Hypertext-Transfer-Protocol"><a href="#HTTPS-Secure-Hypertext-Transfer-Protocol" class="headerlink" title="HTTPS: Secure Hypertext Transfer Protocol"></a>HTTPS: Secure Hypertext Transfer Protocol</h3><ul>
+<li>Encrypted text</li>
+<li>HTTP over Secure Socket Layer(SSL)</li>
+</ul>
+<h3 id="SSL-Secure-Sockets-Layer"><a href="#SSL-Secure-Sockets-Layer" class="headerlink" title="SSL: Secure Sockets Layer"></a>SSL: Secure Sockets Layer</h3><ul>
+<li>Protocol that’s used to ensure security on the internet.</li>
+<li>Use public key encryption to secure data.</li>
+</ul>
+<h3 id="TLS-Transport-Layer-Security"><a href="#TLS-Transport-Layer-Security" class="headerlink" title="TLS: Transport Layer Security"></a>TLS: Transport Layer Security</h3><ul>
+<li>The latest industry standard cryptographic protocol.</li>
+<li>The successor to SSL.</li>
+<li>Authenticates the server, client and encrypts the data.</li>
+</ul>
+<h2 id="More-Read"><a href="#More-Read" class="headerlink" title="More Read"></a>More Read</h2><ul>
+<li><a href="/2021/03/08/tech/authentication/ssl-tls-protocol">SSL/TLS handshake protocol</a></li>
+<li><a href="/2021/03/08/tech/authentication/digital-signature-and-digital-certificate">Digital Signature &amp; Digital Certificate</a></li>
+</ul>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=hExRDVZHhig">SSL, TLS, HTTP, HTTPS Explained</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/03/07/tech/nodejs/learn-node-js/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Di Lin">
+      <meta itemprop="description" content="Di Lin's personal blog">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di Lin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/07/tech/nodejs/learn-node-js/" class="post-title-link" itemprop="url">Learn Node.js</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-07 20:27:45" itemprop="dateCreated datePublished" datetime="2021-03-07T20:27:45+08:00">2021-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-15 18:41:20" itemprop="dateModified" datetime="2021-03-15T18:41:20+08:00">2021-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/NodeJS/" itemprop="url" rel="index"><span itemprop="name">NodeJS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/images/tech/nodejs/learn-node-js/nodejs-logo.png" alt="node logo"></p>
+<h2 id="Unit-1-Overview-of-Node-js-Learning-Path"><a href="#Unit-1-Overview-of-Node-js-Learning-Path" class="headerlink" title="Unit 1: Overview of Node.js Learning Path"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=dlwW2uvQtGY">Unit 1: Overview of Node.js Learning Path</a></h2><ul>
+<li><p>Node Architecture</p>
+<p>  <img src="/images/tech/nodejs/learn-node-js/node-architecture.png" alt="node architecture"></p>
+</li>
+<li><p>Libuv.org</p>
+</li>
+<li><p>node modules</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/">Overview of Blocking vs Non-Blocking</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://nodejs.org/en/docs/guides/simple-profiling/">Easy profiling for Node.js Applications</a></p>
+</li>
+<li><p><img src="/images/tech/nodejs/learn-node-js/event-loop.png" alt="node event loop"></p>
+</li>
+</ul>
+<h2 id="Unit-2-Installing-Node-js-npm-and-VSCode"><a href="#Unit-2-Installing-Node-js-npm-and-VSCode" class="headerlink" title="Unit 2: Installing Node.js, npm, and VSCode"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jOrPHKqz_iE">Unit 2: Installing Node.js, npm, and VSCode</a></h2><h3 id="Install-Node-and-Npm"><a href="#Install-Node-and-Npm" class="headerlink" title="Install Node and Npm"></a>Install Node and Npm</h3><ol>
+<li><p>Install from nodejs.org</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://nodejs.org/en/about/releases/">https://nodejs.org/en/about/releases/</a></p>
+<p>  <img src="/images/tech/nodejs/learn-node-js/release-schedule.svg" alt="release schedule"></p>
+</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">Install Node &amp; Npm via node version manager (nvm)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/02/npx.html">Use <strong>Npx</strong></a></p>
+</li>
+</ol>
+<h2 id="Unit-3-A-tour-of-Node-js"><a href="#Unit-3-A-tour-of-Node-js" class="headerlink" title="Unit 3: A tour of Node.js"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MvOtK6F1HWI">Unit 3: A tour of Node.js</a></h2><h3 id="Node-js-Architecture"><a href="#Node-js-Architecture" class="headerlink" title="Node.js Architecture"></a>Node.js Architecture</h3><p>Node.js is a JavaScript runtime built on <a target="_blank" rel="noopener" href="https://v8.dev/">Chrome V8 JavaScript engine</a>.</p>
+<p><img src="/images/tech/nodejs/learn-node-js/node-architecture.png" alt="node architecture"></p>
+<ul>
+<li>JavaScript Engine: <a target="_blank" rel="noopener" href="https://v8.dev/docs">Chrome V8</a></li>
+<li>Event Loop: <a target="_blank" rel="noopener" href="http://libuv.org/">libuv</a></li>
+<li>Node.js API: <a target="_blank" rel="noopener" href="https://nodejs.org/docs/latest/api/">https://nodejs.org/docs/latest/api/</a></li>
+</ul>
+<h3 id="ECMAScript-Standard"><a href="#ECMAScript-Standard" class="headerlink" title="ECMAScript Standard"></a>ECMAScript Standard</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://nodejs.org/en/docs/es6/">ECMAScript 2015 (ES6) and beyond</a></li>
+<li><a target="_blank" rel="noopener" href="https://node.green/">Node.js ES2015 (ES6) Support</a></li>
+</ul>
+<h3 id="Read-Eval-Print-Loop-REPL"><a href="#Read-Eval-Print-Loop-REPL" class="headerlink" title="Read-Eval-Print-Loop (REPL)"></a>Read-Eval-Print-Loop (REPL)</h3><h3 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h3><p>npm consists of:</p>
+<ul>
+<li>the website: <a target="_blank" rel="noopener" href="https://www.npmjs.com/">https://www.npmjs.com</a></li>
+<li>the CLI</li>
+<li>the registry</li>
+</ul>
+<h2 id="Unit-4-Node-js-basic-concepts"><a href="#Unit-4-Node-js-basic-concepts" class="headerlink" title="Unit 4: Node.js basic concepts"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kycaDCIcxP0">Unit 4: Node.js basic concepts</a></h2><h3 id="Node-Modules"><a href="#Node-Modules" class="headerlink" title="Node Modules"></a>Node Modules</h3><p>In the Node.js module system, each file is treated as a separate module.</p>
+<ul>
+<li>Built-in Modules</li>
+<li>Installed Modules from <a target="_blank" rel="noopener" href="https://www.npmjs.com/">https://www.npmjs.com/</a></li>
+<li>Customized Modules</li>
+</ul>
+<h3 id="Non-blocking-I-O"><a href="#Non-blocking-I-O" class="headerlink" title="Non-blocking I/O"></a>Non-blocking I/O</h3><p><a target="_blank" rel="noopener" href="https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/">Overview of Blocking vs Non-Blocking</a></p>
+<h3 id="Load-Testing"><a href="#Load-Testing" class="headerlink" title="Load Testing"></a>Load Testing</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://httpd.apache.org/docs/2.4/programs/ab.html">Apache Benchmark</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/loadtest">loadtest</a></p>
+  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loadtest -c 10 --rps 200 http://mysite.com/</span><br></pre></td></tr></tbody></table></figure>
+<p>Consider case where each request to a web server takes 50ms to complete and 45ms of that 50ms is database I/O that can be done asynchronously. Choosing <strong>non-blocking</strong> asynchronous operations frees up that 45ms per request to handle other requests. This is a significant difference in capacity just by choosing to use <strong>non-blocking</strong> methods instead of <strong>blocking</strong> methods.</p>
+</li>
+</ul>
+<h2 id="Unit-5-The-event-loop"><a href="#Unit-5-The-event-loop" class="headerlink" title="Unit 5: The event loop"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=X9zVB9WafdE">Unit 5: The event loop</a></h2><p><a target="_blank" rel="noopener" href="https://blog.logrocket.com/a-complete-guide-to-the-node-js-event-loop/">A complete guide to the Node.js event loop</a></p>
+<h2 id="Unit-8-Node-dependency-management"><a href="#Unit-8-Node-dependency-management" class="headerlink" title="Unit 8: Node dependency management"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HOhTu3tl3Mw">Unit 8: Node dependency management</a></h2><ol>
+<li><p><strong>Semantic version (semver)</strong></p>
+<ul>
+<li>npm semver calculator: <a target="_blank" rel="noopener" href="https://semver.npmjs.com/">https://semver.npmjs.com/</a></li>
+<li><strong>caret (aka hat) symbol, <code>^</code></strong> : include everything that does not increment the first non-zero portion of semver.  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"^2.1.9": &gt;= 2.1.9 and &lt; 3.0.0 </span><br></pre></td></tr></tbody></table></figure></li>
+<li><strong>tilde symbol, <code>~</code></strong> : include everything greater than a particular version in the same minor range.  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"~2.1.9": &gt;= 2.1.9 and &lt; 2.2.0</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</li>
+<li><p>Visualization of npm dependencies: <a target="_blank" rel="noopener" href="http://npm.anvaka.com/">http://npm.anvaka.com/</a></p>
+</li>
+</ol>
+<h2 id="Unit-9-Unit-testing-and-linting-with-Node-js"><a href="#Unit-9-Unit-testing-and-linting-with-Node-js" class="headerlink" title="Unit 9: Unit testing and linting with Node.js"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=IciEzaWWtgI">Unit 9: Unit testing and linting with Node.js</a></h2><p>There are two aspects to code quality that you can automate.</p>
+<ul>
+<li>Testing<ul>
+<li>A test framework [<a target="_blank" rel="noopener" href="https://mochajs.org/">Mocha.js</a>]</li>
+<li>An assertion library (if the framework doesn’t come with one) [<a target="_blank" rel="noopener" href="https://chaijs.org/">Chai.js</a>]</li>
+<li>A test doubles library (again, if the framework doesn’t provide one) [<a target="_blank" rel="noopener" href="https://sinonjs.org/">Sinon.js</a>]</li>
+<li>Code coverage utility [<a target="_blank" rel="noopener" href="https://istanbul.js.org/">Istanbul</a>]</li>
+</ul>
+</li>
+<li>Linting<ul>
+<li>A linter with parser [<a target="_blank" rel="noopener" href="https://eslint.org/">ESlint</a>]</li>
+<li>A configuration to apply rules to your code</li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://scotch.io/tutorials/how-to-test-nodejs-apps-using-mocha-chai-and-sinonjs">How to Test NodeJS Apps using Mocha, Chai and SinonJS</a></p>
+<h2 id="Unit-10-Application-logging-with-Winston-and-Log4js"><a href="#Unit-10-Application-logging-with-Winston-and-Log4js" class="headerlink" title="Unit 10: Application logging with Winston and Log4js"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=To9F0Xv3adk&amp;list=PL_Kpc42ZZa74gs2Sc94M2wAhZvwWDyd5o&amp;index=9">Unit 10: Application logging with Winston and Log4js</a></h2><p>Application logging is a reality that we as developers have to deal with, and it isn’t going anywhere. When our applications run, things happen. Some of those things are important. Others are not.</p>
+<p>Logs tell us what happened and are useful when supporting our applications. console.log() is fine for prototypes, but for production quality applications, you need production quality logging.</p>
+<p>You can write this code yourself, but the logging problem has been solved.</p>
+<p>Two popular third party logging packages for Node applications</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/winston">Winston</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/log4js%E2%80%8B">Log4js</a></li>
+</ul>
+<p>Logging Example on GitHub: <a target="_blank" rel="noopener" href="https://github.com/jstevenperry/IBM-Developer/tree/master/Node.js/Course/Unit-10">link</a></p>
+<h2 id="Unit-11-ExpressJS-and-Pug"><a href="#Unit-11-ExpressJS-and-Pug" class="headerlink" title="Unit 11: ExpressJS and Pug"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kaql4sIjpbU&amp;list=PL_Kpc42ZZa74gs2Sc94M2wAhZvwWDyd5o&amp;index=10">Unit 11: ExpressJS and Pug</a></h2><ul>
+<li>ExpressJS: for a web framework, which includes routing.</li>
+<li>Pug: for the user interface.</li>
+</ul>
+<p>ExpressJS and Pug Example on GitHub: <a target="_blank" rel="noopener" href="https://github.com/jstevenperry/IBM-Developer/tree/master/Node.js/Course/Unit-11">link</a></p>
+<h2 id="Unit-12-MongoDB"><a href="#Unit-12-MongoDB" class="headerlink" title="Unit 12: MongoDB"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=FBmSzlpyVAI&amp;list=PL_Kpc42ZZa74gs2Sc94M2wAhZvwWDyd5o&amp;index=11">Unit 12: MongoDB</a></h2><p><strong>MongoDB</strong> is one of the most popular choices for storing data used with Node applications.</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/NoSQL">NoSQL databases (WikiPedia)</a></p>
+</li>
+<li><p>MongoDB:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/mongodb/mongo">GitHub repo</a> </li>
+<li><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/tutorial/getting-started/">Getting Started</a> </li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/jstevenperry/IBM-Developer/tree/master/Node.js/Course/Unit-12">Example</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/01/15/life/kew3101/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -797,307 +1204,6 @@ div.container1 {
   
   
 
-      
-  
-  
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/01/02/travelling-guideline/Japan/">
-
-    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Di Lin">
-      <meta itemprop="description" content="Di Lin's personal blog">
-    </span>
-
-    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Di Lin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/02/travelling-guideline/Japan/" class="post-title-link" itemprop="url">Japan</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-02 21:00:00" itemprop="dateCreated datePublished" datetime="2021-01-02T21:00:00+08:00">2021-01-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-30 10:09:44" itemprop="dateModified" datetime="2021-03-30T10:09:44+08:00">2021-03-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Travelling/" itemprop="url" rel="index"><span itemprop="name">Travelling</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <object data="/PDF/japan.pdf" type="application/pdf" width="800px" height="800px">
-    <embed src="/PDF/japan.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://binarywoodb.github.io/PDF/japan.pdf">Download PDF</a>.</p>
-    
-</object>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/01/02/tech/toolkit/vim-toolkit/">
-
-    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Di Lin">
-      <meta itemprop="description" content="Di Lin's personal blog">
-    </span>
-
-    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Di Lin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/02/tech/toolkit/vim-toolkit/" class="post-title-link" itemprop="url">Vim Toolkit</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-02 20:52:56" itemprop="dateCreated datePublished" datetime="2021-01-02T20:52:56+08:00">2021-01-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-15 15:37:27" itemprop="dateModified" datetime="2021-03-15T15:37:27+08:00">2021-03-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/Toolkit/" itemprop="url" rel="index"><span itemprop="name">Toolkit</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Vim-Toolkit"><a href="#Vim-Toolkit" class="headerlink" title="Vim Toolkit"></a>Vim Toolkit</h1><h2 id="Graphical-Cheat-Sheet"><a href="#Graphical-Cheat-Sheet" class="headerlink" title="Graphical Cheat Sheet"></a>Graphical Cheat Sheet</h2><table>
-<thead>
-<tr>
-<th align="center"><img src="/images/tech/toolkit/vim-toolkit/vi-vim-cheat-sheet.png" alt="vim.png"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><em>vi-vim-cheat-sheet</em></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center"><img src="/images/tech/toolkit/vim-toolkit/20120104_vim_cn.jpg" alt="vim.png"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><em>vi-vim-cheat-sheet-ChineseVersion</em></td>
-</tr>
-</tbody></table>
-<h2 id="Personal-Cheat-Sheet"><a href="#Personal-Cheat-Sheet" class="headerlink" title="Personal Cheat Sheet"></a>Personal Cheat Sheet</h2><ol>
-<li><p>上下左右</p>
-<p> <img src="/images/tech/toolkit/vim-toolkit/direction.png" alt="image.png"></p>
-</li>
-<li><p>dd: 删除一行<br> u: undo<br> ctrl-r: redo(undo undo)</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/01/02/tech/toolkit/git-toolkit/">
-
-    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Di Lin">
-      <meta itemprop="description" content="Di Lin's personal blog">
-    </span>
-
-    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Di Lin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/02/tech/toolkit/git-toolkit/" class="post-title-link" itemprop="url">Git Toolkit</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-02 20:34:57" itemprop="dateCreated datePublished" datetime="2021-01-02T20:34:57+08:00">2021-01-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-15 15:32:08" itemprop="dateModified" datetime="2021-03-15T15:32:08+08:00">2021-03-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/Toolkit/" itemprop="url" rel="index"><span itemprop="name">Toolkit</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git-ToolKit"><a href="#Git-ToolKit" class="headerlink" title="Git ToolKit"></a>Git ToolKit</h1><h2 id="Git-config"><a href="#Git-config" class="headerlink" title="Git config"></a>Git config</h2>  <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config -l <span class="comment"># list all the config of the repo</span></span><br><span class="line">git config --global -l <span class="comment"># list all global config</span></span><br><span class="line">git config --global core.whitespace cr-at-eol <span class="comment"># (Windows Git): Hide ^M (Carriage Return) in Diff</span></span><br><span class="line">git config --global core.autocrlf <span class="literal">true</span> <span class="comment"># 提交时转换为LF(Linux \n)，检出时转换为CRLF(Windows \r\n)</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="Create-a-new-branch"><a href="#Create-a-new-branch" class="headerlink" title="Create a new branch"></a>Create a new branch</h2><ol>
-<li><p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF">create a new branch and track remote branch</a></p>
- <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b serverfix origin/serverfix</span><br><span class="line">Branch serverfix <span class="built_in">set</span> up to track remote branch serverfix from origin.</span><br><span class="line">Switched to a new branch <span class="string">'serverfix'</span></span><br></pre></td></tr></tbody></table></figure></li>
-<li><p>Create a new feature branch in <strong>remote</strong>.</p>
- <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. Create a new branch:</span></span><br><span class="line">git checkout -b feature_branch_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. Edit, add and commit your files.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. Push your branch to the remote repository:</span></span><br><span class="line">git push -u origin feature_branch_name</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="Undo-the-most-recent-commit"><a href="#Undo-the-most-recent-commit" class="headerlink" title="Undo the most recent commit"></a>Undo the most recent commit</h2></li>
-</ol>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD~</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="Git-submodule"><a href="#Git-submodule" class="headerlink" title="Git  submodule"></a>Git  submodule</h2><ol>
-<li><p>If you want to git clone a repo alone with submodules. Use the following command:</p>
- <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --recursive https://github.com/&lt;repo-name&gt;.git</span><br></pre></td></tr></tbody></table></figure></li>
-<li><p>If you have git clone a repo with submodule, you can find submodules’ folders, but the folders are empty.</p>
- <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/&lt;repo-name&gt;.git</span><br><span class="line">git submodule init        <span class="comment"># Init your local configuration file</span></span><br><span class="line">git submodule update      <span class="comment"># Will pull submodules you need</span></span><br></pre></td></tr></tbody></table></figure>
-<p>Use the above commands and you can have a complete repo.</p>
-</li>
-</ol>
-<h2 id="Git-clone"><a href="#Git-clone" class="headerlink" title="Git clone"></a>Git clone</h2><ol>
-<li><p>git clone a private repo</p>
- <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Normal case</span></span><br><span class="line">git <span class="built_in">clone</span> https://username:password@github.com/username/repository.git</span><br><span class="line"><span class="comment"># or later input password</span></span><br><span class="line">git <span class="built_in">clone</span> https://username@github.com/username/repository.git</span><br><span class="line">Password:</span><br><span class="line"></span><br><span class="line"><span class="comment"># [!!!] When using two-factor authentication(https://stackoverflow.com/a/52011442/8522166)</span></span><br><span class="line"><span class="comment"># 2fa(https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/username/repo.git</span><br><span class="line">Username: your_username</span><br><span class="line">Password: your_token</span><br><span class="line"><span class="comment"># or inline</span></span><br><span class="line">git <span class="built_in">clone</span> https://username:token@github.com/username/repository.git</span><br></pre></td></tr></tbody></table></figure></li>
-<li><p>git clone a single branch</p>
- <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --single-branch --branch &lt;branchname&gt; host:/dir.git</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="Git-pull"><a href="#Git-pull" class="headerlink" title="Git pull"></a>Git pull</h2></li>
-</ol>
-<h3 id="git-pull-amp-git-pull-origin-master"><a href="#git-pull-amp-git-pull-origin-master" class="headerlink" title="git pull &amp; git pull origin master"></a><a href="%5Bhttps://www.quora.com/What-are-the-differences-between-git-pull-git-pull-origin-master-and-git-pull-origin-master%5D(https://www.quora.com/What-are-the-differences-between-git-pull-git-pull-origin-master-and-git-pull-origin-master)"><code>git pull</code> &amp; <code>git pull origin master</code></a></h3><ul>
-<li><p><code>git pull</code> = <code>git fetch</code> + <code>git merge</code></p>
-</li>
-<li><p><code>git pull --rebase</code> = <code>git fetch</code> + <code>git rebase</code></p>
-</li>
-<li><p><code>git pull &lt;repo&gt; &lt;branch&gt;</code>:<br>  1st argument by default is the current branch’s <code>remote</code>.<br>  2nd argument by default is the current branch’s <code>merge</code>.</p>
-</li>
-</ul>
-<p>Say you are working on a local branch <code>dev</code>, whose upstream branch is <code>origin/dev</code>.</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -vv</span><br><span class="line">* dev       328c854 [origin/dev] Chapter_5 outline</span><br><span class="line">master    7dedf87 [origin/master] May 9 discussion (<span class="comment">#14)</span></span><br><span class="line"></span><br><span class="line">$ git config --get branch.dev.remote</span><br><span class="line">origin</span><br><span class="line">$ git config --get branch.dev.merge</span><br><span class="line">refs/heads/dev</span><br></pre></td></tr></tbody></table></figure>
-
-<p><code>git pull</code> will pull from <code>origin/dev</code> and merge to current <code>dev</code> branch.<br><code>git pull origin master</code> can pull <code>origin/master</code> and merge to current <code>dev</code> branch.[!!]</p>
-<p>Example: </p>
-<p>You are developing on local <code>dev</code> branch, push to the <code>origin/dev</code> at times for a pr. Now the master has some new updates and you would like to sync with master. You can use <code>git pull origin master</code> to pull master’s new update and merge to your branch.</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin master</span><br><span class="line">Merge branch <span class="string">'master'</span> of github.com:arthma/iot-book into dev</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="Merge-Two-GitHub-Repo"><a href="#Merge-Two-GitHub-Repo" class="headerlink" title="Merge Two GitHub Repo"></a>Merge Two GitHub Repo</h3><p>Say you have two github repo A and B. A is a copy of B and develop some features. Now you want to merge A back to B so the new feature can be added to B.</p>
-<p>Go to B’s repo, git pull A’s code.</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In B repo. Pull A code</span></span><br><span class="line">git pull git@github.com:A-organization/A-project-name.git</span><br></pre></td></tr></tbody></table></figure>
-<p>Then solve conflicts, submmit commit, git push, done.</p>
-<h2 id="Git-rebase"><a href="#Git-rebase" class="headerlink" title="Git rebase"></a><a target="_blank" rel="noopener" href="http://gitbook.liuhui998.com/4_2.html">Git rebase</a></h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1168,20 +1274,20 @@ div.container1 {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">72</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
