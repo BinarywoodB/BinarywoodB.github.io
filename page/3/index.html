@@ -165,6 +165,114 @@
   
   
   <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/03/08/tech/authentication/digital-signature-and-digital-certificate/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Di Lin">
+      <meta itemprop="description" content="Di Lin's personal blog">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di Lin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/08/tech/authentication/digital-signature-and-digital-certificate/" class="post-title-link" itemprop="url">Digital Signature &amp; Digital Certificate</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-08 17:38:18" itemprop="dateCreated datePublished" datetime="2021-03-08T17:38:18+08:00">2021-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-15 20:23:46" itemprop="dateModified" datetime="2021-03-15T20:23:46+08:00">2021-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Authentication/" itemprop="url" rel="index"><span itemprop="name">Authentication</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Digital-Signature"><a href="#Digital-Signature" class="headerlink" title="Digital Signature"></a>Digital Signature</h2><h3 id="What-is-Digital-Signature"><a href="#What-is-Digital-Signature" class="headerlink" title="What is Digital Signature"></a>What is Digital Signature</h3><p>A <strong>digital signature</strong> is equivalent to a handwritten signature in paper. It is an electronic verification of the sender.</p>
+<p>A digital signature serves three basic purposes.</p>
+<ul>
+<li>Authentication</li>
+<li>Non-repudiation</li>
+<li>Integrity</li>
+</ul>
+<h3 id="How-Digital-Signature-Works"><a href="#How-Digital-Signature-Works" class="headerlink" title="How Digital Signature Works"></a>How Digital Signature Works</h3><p><img src="/images/tech/authentication/digital-signature-and-digital-certificate/what-is-digital-signature.png" alt="what-is-digital-signature"></p>
+<p>Keep in mind, digital signature is not about encrypting document, just like paper-based signature.</p>
+<h3 id="Weakness-of-Digital-Signature"><a href="#Weakness-of-Digital-Signature" class="headerlink" title="Weakness of Digital Signature"></a>Weakness of Digital Signature</h3><p>Digital signature lacks authentication! (Anyone can pretend he is Bob.)</p>
+<p>Man-in-the-middle attack:</p>
+<p><img src="/images/tech/authentication/digital-signature-and-digital-certificate/Man-in-the-middle-attack-1.png" alt="Man-in-the-middle-attack-1"></p>
+<p><img src="/images/tech/authentication/digital-signature-and-digital-certificate/Man-in-the-middle-attack-2.png" alt="Man-in-the-middle-attack-2"></p>
+<p>So we need <strong>digital certificate</strong>!</p>
+<h2 id="Digital-Certificate"><a href="#Digital-Certificate" class="headerlink" title="Digital Certificate"></a>Digital Certificate</h2><p><strong>Digital certificates</strong> are electronic credentials issued by a trusted third party.</p>
+<h3 id="Why-Do-We-Need-Digital-Certificate"><a href="#Why-Do-We-Need-Digital-Certificate" class="headerlink" title="Why Do We Need Digital Certificate"></a>Why Do We Need Digital Certificate</h3><p>Because digital certificate verifies not only the identity of the owner, but also that the owner owns the public key.</p>
+<p>Digital certificate verifies the digital signature is truly signed by the claimed signer.</p>
+<h3 id="How-SSL-Certificate-Works"><a href="#How-SSL-Certificate-Works" class="headerlink" title="How SSL Certificate Works"></a>How SSL Certificate Works</h3><h4 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h4><p><img src="/images/tech/authentication/digital-signature-and-digital-certificate/pre.png" alt="pre"></p>
+<h4 id="SSL-Certificate-Flow"><a href="#SSL-Certificate-Flow" class="headerlink" title="SSL Certificate Flow"></a>SSL Certificate Flow</h4><p><img src="/images/tech/authentication/digital-signature-and-digital-certificate/ssl-cer-flow.png" alt="ssl-cer-flow"></p>
+<h4 id="Signed-on-Trusted-Third-Party-CA-eg-Google-CA"><a href="#Signed-on-Trusted-Third-Party-CA-eg-Google-CA" class="headerlink" title="Signed on Trusted Third Party CA (eg. Google CA)"></a>Signed on Trusted Third Party CA (eg. Google CA)</h4><p><img src="/images/tech/authentication/digital-signature-and-digital-certificate/cer-with-gg.png" alt="cer-with-gg"></p>
+<h4 id="Self-Signed-Certificate"><a href="#Self-Signed-Certificate" class="headerlink" title="Self-Signed Certificate"></a>Self-Signed Certificate</h4><p><img src="/images/tech/authentication/digital-signature-and-digital-certificate/self-sign-cer.png" alt="self-sign-cer"></p>
+<h2 id="More-Read"><a href="#More-Read" class="headerlink" title="More Read"></a>More Read</h2><ul>
+<li><a href="/2021/03/08/tech/authentication/ssl-tls-protocol">SSL/TLS handshake protocol</a></li>
+<li><a href="/2021/03/08/tech/authentication/http-https-ssl-tls">SSL, TLS, HTTP, HTTPS Explained</a></li>
+</ul>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UbMlPIgzTxc">Why digital certificate?</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=33VYnE7Bzpk">How SSL certificate works?</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=T4Df5_cojAs">How does HTTPS work? What’s a CA? What’s a self-signed Certificate?</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=TmA2QWSLSPg">What is digital signature?</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/03/08/tech/authentication/ssl-tls-protocol/">
 
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1127,83 +1235,6 @@ div.container1 {
   
   
 
-      
-  
-  
-  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/01/02/travelling-guideline/Shanghai/">
-
-    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Di Lin">
-      <meta itemprop="description" content="Di Lin's personal blog">
-    </span>
-
-    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Di Lin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/02/travelling-guideline/Shanghai/" class="post-title-link" itemprop="url">Shanghai</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-02 21:01:32" itemprop="dateCreated datePublished" datetime="2021-01-02T21:01:32+08:00">2021-01-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-30 10:10:15" itemprop="dateModified" datetime="2021-03-30T10:10:15+08:00">2021-03-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Travelling/" itemprop="url" rel="index"><span itemprop="name">Travelling</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <object data="/PDF/shanghai.pdf" type="application/pdf" width="800px" height="800px">
-    <embed src="/PDF/shanghai.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://binarywoodb.github.io/PDF/shanghai.pdf">Download PDF</a>.</p>
-    
-</object>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1274,7 +1305,7 @@ div.container1 {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1287,7 +1318,7 @@ div.container1 {
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
