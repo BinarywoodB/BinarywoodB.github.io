@@ -1,0 +1,527 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"binarywoodb.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="NPM Dependency Management ModelDependency Resolutionnpm3 resolves dependencies differently than npm2. While npm2 installs all dependencies in a nested way, npm3 tries to mitigate the deep trees and re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Understanding Npm Dependency Resolution">
+<meta property="og:url" content="https://binarywoodb.github.io/2021/03/15/tech/nodejs/npm-dependency-resolution/index.html">
+<meta property="og:site_name" content="Di Lin's Blog">
+<meta property="og:description" content="NPM Dependency Management ModelDependency Resolutionnpm3 resolves dependencies differently than npm2. While npm2 installs all dependencies in a nested way, npm3 tries to mitigate the deep trees and re">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/nodejs/npm-dependency-resolution/a-require-b.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/nodejs/npm-dependency-resolution/npm3deps2.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/nodejs/npm-dependency-resolution/npm3deps3.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/nodejs/npm-dependency-resolution/npm3deps4.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/nodejs/npm-dependency-resolution/tree.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/nodejs/npm-dependency-resolution/npmlsdepth0.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/nodejs/npm-dependency-resolution/npm3deps12.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/nodejs/npm-dependency-resolution/npm3deps13.png">
+<meta property="article:published_time" content="2021-03-15T22:56:45.000Z">
+<meta property="article:modified_time" content="2022-12-29T17:32:23.084Z">
+<meta property="article:author" content="Di Lin">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="Npm">
+<meta property="article:tag" content="Dependency Resolution">
+<meta property="article:tag" content="Dependency Management">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://binarywoodb.github.io/images/tech/nodejs/npm-dependency-resolution/a-require-b.png">
+
+<link rel="canonical" href="https://binarywoodb.github.io/2021/03/15/tech/nodejs/npm-dependency-resolution/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Understanding Npm Dependency Resolution | Di Lin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Di Lin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-cv">
+
+    <a href="/CV/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>CV</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/03/15/tech/nodejs/npm-dependency-resolution/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Di Lin">
+      <meta itemprop="description" content="Di Lin's personal blog">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di Lin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Understanding Npm Dependency Resolution
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-15 15:56:45" itemprop="dateCreated datePublished" datetime="2021-03-15T15:56:45-07:00">2021-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-12-29 09:32:23" itemprop="dateModified" datetime="2022-12-29T09:32:23-08:00">2022-12-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/NodeJS/" itemprop="url" rel="index"><span itemprop="name">NodeJS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="NPM-Dependency-Management-Model"><a href="#NPM-Dependency-Management-Model" class="headerlink" title="NPM Dependency Management Model"></a>NPM Dependency Management Model</h2><h3 id="Dependency-Resolution"><a href="#Dependency-Resolution" class="headerlink" title="Dependency Resolution"></a>Dependency Resolution</h3><p>npm3 resolves dependencies differently than npm2.</p>
+<p>While npm2 installs all dependencies in a <strong>nested way</strong>, npm3 tries to mitigate the deep trees and redundancy that such nesting causes. npm3 attempts this by installing some secondary dependencies (dependencies of dependencies) in a <strong>flat way</strong>, in the same directory as the primary dependency that requires it.</p>
+<p>Imagine we have a module, A. A requires B.<br><img src="/images/tech/nodejs/npm-dependency-resolution/a-require-b.png" alt="a require b"></p>
+<p>Now, let’s create an application that requires module A.</p>
+<p><img src="/images/tech/nodejs/npm-dependency-resolution/npm3deps2.png" alt="npm3deps2"></p>
+<p>Now, let’s say we want to require another module, C. C requires B, but at another version than A.</p>
+<p><img src="/images/tech/nodejs/npm-dependency-resolution/npm3deps3.png" alt="npm3deps3"></p>
+<p>However, since B v1.0 is already a top-level dep, we cannot install B v2.0 as a top level dependency. npm v3 handles this by defaulting to npm v2 behavior and nesting the new, different, module B version dependency under the module that requires it – in this case, module C.</p>
+<p><img src="/images/tech/nodejs/npm-dependency-resolution/npm3deps4.png" alt="npm3deps4"></p>
+<p><img src="/images/tech/nodejs/npm-dependency-resolution/tree.png" alt="tree"><br>Noted that you can list the dependencies and still see their relationships using <code>npm ls</code>.</p>
+<p>If you want to just see your primary dependencies, you can use:</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm ls --depth=0</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="/images/tech/nodejs/npm-dependency-resolution/npmlsdepth0.png" alt="npmlsdepth0"></p>
+<h3 id="Duplication-and-Deduping"><a href="#Duplication-and-Deduping" class="headerlink" title="Duplication and Deduping"></a>Duplication and Deduping</h3><p>See <a target="_blank" rel="noopener" href="http://npm.github.io/npm-like-im-5/npm3/duplication.html">Duplication and Deduping</a> article for better illustration.</p>
+<p>Use <code>npm dedupe</code> to get rid of duplication.</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm dedupe</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><p>Before dedupe</p>
+<p>  <img src="/images/tech/nodejs/npm-dependency-resolution/npm3deps12.png" alt="npm3deps12"></p>
+</li>
+<li><p>After dedupe</p>
+<p>  <img src="/images/tech/nodejs/npm-dependency-resolution/npm3deps13.png" alt="npm3deps13"></p>
+</li>
+</ul>
+<h2 id="Comparision-with-Other-Package-Management-Models"><a href="#Comparision-with-Other-Package-Management-Models" class="headerlink" title="Comparision with Other Package Management Models"></a>Comparision with Other Package Management Models</h2><p>At a high level, npm is not too dissimilar from other package managers for programming languages: packages depend on other packages, and they express those dependencies with <em>version ranges</em>. npm happens to use the semver versioning scheme to express those ranges, but the way it performs version resolution is mostly immaterial; what matters is that <strong>packages can depend on ranges rather than specific versions of packages</strong>.</p>
+<p>Npm installs a <em>tree</em> of dependencies. That is, every package installed gets its own set of dependencies rather than forcing every package to share the same canonical set of packages.</p>
+<p>For example, consider two packages, <code>foo</code> and <code>bar</code>. Each of them have their own set of dependencies, which can be represented as a tree:</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">foo</span><br><span class="line">├── hello ^0.1.2</span><br><span class="line">└── world ^1.0.7</span><br><span class="line"></span><br><span class="line">bar</span><br><span class="line">├── hello ^0.2.8</span><br><span class="line">└── goodbye ^3.4.0</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Most package managers (including RubyGems/Bundler, pip, and Cabal) would simply barf here, reporting a <strong>version conflict</strong>. This is because, <strong>in most package management models, only one version of any particular package can be installed at a time.</strong></p>
+<p>In contrast, npm has a somewhat easier job: it’s totally okay with installing different versions of the same package because each package gets its own set of dependencies. In the aforementioned example, the resulting directory structure would look something like this:</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">node_modules/</span><br><span class="line">├── foo/</span><br><span class="line">│   └── node_modules/</span><br><span class="line">│       ├── hello/</span><br><span class="line">│       └── world/</span><br><span class="line">└── bar/</span><br><span class="line">    └── node_modules/</span><br><span class="line">        ├── hello/</span><br><span class="line">        └── goodbye/</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Pros"><a href="#Pros" class="headerlink" title="Pros"></a>Pros</h3><ol>
+<li><p>Extremely simple model but get pretty messy quickly.</p>
+<p> Notably,the directory structure very closely mirrors the actual dependency tree. The above diagram is something of a simplification: in practice, each transitive dependency would have its own node_modules directory and so on, but the directory structure can get pretty messy pretty quickly. </p>
+</li>
+<li><p>Avoid “Dependency Hell”.</p>
+<p> The npm model of package management is more complicated than that of other languages, but it provides a real advantage: implementation details are kept as implementation details. In other systems, it’s quite possible to find yourself in “dependency hell”, when you personally know that the version conflict reported by your package manager is not a real problem, but because the package system must pick a single canonical version, there’s no way to make progress without adjusting code in your dependencies. This is extremely frustrating.</p>
+</li>
+</ol>
+<h3 id="Cons"><a href="#Cons" class="headerlink" title="Cons"></a>Cons</h3><ol>
+<li><p>Larger code size. Worse performance.</p>
+<p> Given the potential for many, many copies of the same package, all with different versions. An increase in code size can often mean more than just a larger program—it can have a significant impact on performance. Larger programs just don’t fit into CPU caches as easily, and merely having to page a program in and out can significantly slow things down. That’s mostly just a tradeoff, though, since you’re sacrificing performance, not program correctness.</p>
+</li>
+<li><p><strong>Dependency isolation can affect cross-package communication.</strong></p>
+<p> See this <a target="_blank" rel="noopener" href="https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/#dependency-isolation-and-values-that-pass-package-boundaries">Dependency isolation and values that pass package boundaries</a> section for detailed illustration.</p>
+<p> An failure example: <a target="_blank" rel="noopener" href="https://github.com/microsoft/botbuilder-js/issues/3342">Dialog will break if two version of botbuilder-dialog package exists</a></p>
+</li>
+</ol>
+<h2 id="PeerDependency"><a href="#PeerDependency" class="headerlink" title="PeerDependency"></a>PeerDependency</h2><p><strong>PeerDependency</strong>: Rather than getting its own copy of a peer dependency, a package expects that dependency to be provided by its dependent.</p>
+<p>The peerDependencies requires <code>npm v7</code>. For <code>npm &gt;= 3 and npm &lt;= 6</code>, peerDependencies can be declared but will not be automatically checked and installed.<br>That is to say, to leverage the peerDependencies feature, we will need to migrate to npm v7 as well as requiring user to update to npm v7.</p>
+<ul>
+<li><p>Node:</p>
+<ul>
+<li>LTS: 14.16.0 (includes npm 6.14.11)</li>
+<li>Current: 15.10.0 (includes npm 7.5.3)</li>
+</ul>
+</li>
+</ul>
+<p>Though node use npm v7 as the current version, the majority will be using npm v6 in 2021. Consider the population, asking user to update to npm v7 adds a new pre-requisite.</p>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://npm.github.io/npm-like-im-5/npm3/dependency-resolution.html">Npm GitBook: Dependency Resolution</a></li>
+<li><a target="_blank" rel="noopener" href="http://npm.github.io/npm-like-im-5/npm3/duplication.html">Npm GitBook: Duplication and Deduping</a></li>
+<li><a target="_blank" rel="noopener" href="https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/">Understanding the npm dependency model</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/Npm/" rel="tag"># Npm</a>
+              <a href="/tags/Dependency-Resolution/" rel="tag"># Dependency Resolution</a>
+              <a href="/tags/Dependency-Management/" rel="tag"># Dependency Management</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/11/tech/authentication/work-with-msal/" rel="prev" title="Work with Microsoft Authentication Library (MSAL)">
+      <i class="fa fa-chevron-left"></i> Work with Microsoft Authentication Library (MSAL)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/22/tech/toolkit/uml-class-diagram/" rel="next" title="UML Class Diagram">
+      UML Class Diagram <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NPM-Dependency-Management-Model"><span class="nav-number">1.</span> <span class="nav-text">NPM Dependency Management Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dependency-Resolution"><span class="nav-number">1.1.</span> <span class="nav-text">Dependency Resolution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Duplication-and-Deduping"><span class="nav-number">1.2.</span> <span class="nav-text">Duplication and Deduping</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparision-with-Other-Package-Management-Models"><span class="nav-number">2.</span> <span class="nav-text">Comparision with Other Package Management Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pros"><span class="nav-number">2.1.</span> <span class="nav-text">Pros</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cons"><span class="nav-number">2.2.</span> <span class="nav-text">Cons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PeerDependency"><span class="nav-number">3.</span> <span class="nav-text">PeerDependency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ref"><span class="nav-number">4.</span> <span class="nav-text">Ref</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Di Lin" src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Di Lin</p>
+  <div class="site-description" itemprop="description">Di Lin's personal blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dilin-ms" title="GitHub → https://github.com/dilin-ms" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lindisjtu@gmail.com" title="E-Mail → mailto:lindisjtu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100015508938807" title="FB Page → https://www.facebook.com/profile.php?id=100015508938807" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.weibo.com/2196766810" title="Weibo → https://www.weibo.com/2196766810" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.instagram.com/lindisjtu/" title="Instagram → https://www.instagram.com/lindisjtu/" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Di Lin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+<script src="/bundle.js"></script></body></html>

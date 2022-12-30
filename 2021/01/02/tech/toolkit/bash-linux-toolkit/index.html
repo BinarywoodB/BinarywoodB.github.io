@@ -1,0 +1,870 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"binarywoodb.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Bash and Linux ToolKit工具标准输入输出   Command Description    echo echo &quot;Hello world!&quot; > hello.sh   printf printf &quot;Test the code %d times, and it still can fail the %d-th time.&quot; 100 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bash and Linux Toolkit">
+<meta property="og:url" content="https://binarywoodb.github.io/2021/01/02/tech/toolkit/bash-linux-toolkit/index.html">
+<meta property="og:site_name" content="Di Lin's Blog">
+<meta property="og:description" content="Bash and Linux ToolKit工具标准输入输出   Command Description    echo echo &quot;Hello world!&quot; > hello.sh   printf printf &quot;Test the code %d times, and it still can fail the %d-th time.&quot; 100 1">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-03T04:08:34.000Z">
+<meta property="article:modified_time" content="2022-12-29T17:32:23.085Z">
+<meta property="article:author" content="Di Lin">
+<meta property="article:tag" content="Bash">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://binarywoodb.github.io/2021/01/02/tech/toolkit/bash-linux-toolkit/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Bash and Linux Toolkit | Di Lin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Di Lin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-cv">
+
+    <a href="/CV/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>CV</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/01/02/tech/toolkit/bash-linux-toolkit/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Di Lin">
+      <meta itemprop="description" content="Di Lin's personal blog">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di Lin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Bash and Linux Toolkit
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-02 20:08:34" itemprop="dateCreated datePublished" datetime="2021-01-02T20:08:34-08:00">2021-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-12-29 09:32:23" itemprop="dateModified" datetime="2022-12-29T09:32:23-08:00">2022-12-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Toolkit/" itemprop="url" rel="index"><span itemprop="name">Toolkit</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Bash-and-Linux-ToolKit"><a href="#Bash-and-Linux-ToolKit" class="headerlink" title="Bash and Linux ToolKit"></a>Bash and Linux ToolKit</h1><h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><h3 id="标准输入输出"><a href="#标准输入输出" class="headerlink" title="标准输入输出"></a>标准输入输出</h3><table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>echo</code></td>
+<td align="left"><code>echo "Hello world!" &gt; hello.sh</code></td>
+</tr>
+<tr>
+<td align="left"><code>printf</code></td>
+<td align="left"><code>printf "Test the code %d times, and it still can fail the %d-th time." 100 101</code></td>
+</tr>
+<tr>
+<td align="left">stdout stderr</td>
+<td align="left"><code>ls 1&gt; /tmp/ls.stdout 2&gt; /tmp/ls.stderr</code></td>
+</tr>
+<tr>
+<td align="left"><code>&amp;&amp;</code> `</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>$(this_is_a_command)</code> or <code>``</code></td>
+<td align="left"><code>touch `seq 1 3`</code> or <code>touch $(seq 1 3)</code></td>
+</tr>
+</tbody></table>
+<h3 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h3><ol>
+<li><p>工作目录(working directory)</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>pwd</code> <code>ls</code> <code>cd</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>du</code></td>
+<td align="left"><code>du -sh *</code> <br> <br> display disk usage statistics</td>
+</tr>
+<tr>
+<td align="left"><code>df</code></td>
+<td align="left"><code>df -h /mnt </code><br> <br> display free disk space</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>查找文件</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>find</code></td>
+<td align="left"><code>find . -type f</code> <br><br>  找到本目录下所有的文件并输出到屏幕 (包括子目录，下同) <br><code>-name</code>: <code>find .  -name "*.jpg" </code> <br> <code>-maxdepth</code>: <code>find -maxdepth 1</code></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>文件操作（移动、拷贝、创建文件夹）</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>cp</code> <code>mv</code> <code>rm</code> <code>mkdir</code> <code>rmdir</code></td>
+<td align="left">在~/.bashrc文件中，加入下面的命令：<br><code>alias cp='cp -i'</code><br><code>alias rm='rm -i' </code><br> <code>alias mv='mv -i'</code><br> <br> <code>-i</code>: 如果命令会删除或者覆盖文件，会提示用户confirm。</td>
+</tr>
+<tr>
+<td align="left"><code>chmod</code></td>
+<td align="left"><code>chmod a-w somefile</code>  <br><br>  把somefile的所有写权限去掉</td>
+</tr>
+<tr>
+<td align="left"><code>ln</code></td>
+<td align="left"><code>ln -s $src $dest</code> <br><br>  创建一个软链接$dest, 它指向的原文件在$src</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="文件内容"><a href="#文件内容" class="headerlink" title="文件内容"></a>文件内容</h3><ol>
+<li><p>查看文件</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>cat</code></td>
+<td align="left"><code>cat &lt;file&gt;</code></td>
+</tr>
+<tr>
+<td align="left"><code>head</code> <code>tail</code></td>
+<td align="left"><code>head -n &lt;file&gt;</code></td>
+</tr>
+<tr>
+<td align="left"><code>less</code> <code>more</code></td>
+<td align="left"><code>less</code>是<code>more</code>的升级版，推荐使用<code>less</code></td>
+</tr>
+<tr>
+<td align="left"><code>diff</code></td>
+<td align="left"><code>diff file1 file2</code></td>
+</tr>
+<tr>
+<td align="left"><code>md5sum</code></td>
+<td align="left"><code>md5sum &lt;file&gt;</code> <br> <br> 计算文件的md5码，用来比较本机和远程文件是否相同</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>文件内容操作</p>
+<table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>cut</code></td>
+<td align="left"><code>cut -f1,3 file1</code><br><br>cut out selected portions of each line of a file<br><code>-b</code> 按字节<br> <code>-f</code>显示某几列</td>
+</tr>
+<tr>
+<td align="left"><code>bc</code></td>
+<td align="left"><code>echo "1.212*3" | bc</code> <br><br>任意精度的计算器</td>
+</tr>
+<tr>
+<td align="left"><code>wc</code></td>
+<td align="left"><code>find . -name "*.jpg" | wc -l</code> <br><br> 数出本目录下所有的jpg文件数量</td>
+</tr>
+<tr>
+<td align="left"><code>sort</code></td>
+<td align="left"><code>sort a.list &gt; a.sort</code> <br><br>  对文件a.list排序并写到a.sort <br><code>-u</code>: 去重<br> <code>-k</code>: sort -k2,2 a.list, 按第2列排序 <br><code>-n</code>: 按数字排序<br><code>-V</code>:可以理解为加强版的按数字排序 <br><code>-r</code>: 倒序 <br><code>-R</code>: 随机</td>
+</tr>
+<tr>
+<td align="left"><code>uniq</code></td>
+<td align="left"><code> cat list1 list2 | sort | uniq &gt; final.list</code> <br> <br> 将list1, list2合并，排序后去重，写到final.list<br>(其实sort一个命令就够了) <br> <code>-c</code>: 用来统计很方便 <br> <code>-u</code> <br> <code>-d</code></td>
+</tr>
+<tr>
+<td align="left"><code>sed</code></td>
+<td align="left"><code>sed "s@origin@corrected@" a.list -i</code><br> 将a.list中每行出现的第一个origin替换为corrected <br> <code>-i</code>: inplace change<br><br> <code>sed -i "s/old/new/g" `grep old -rl /www` </code><br> 将<code>/www</code>路径下递归的所有文件中包含<code>old</code>字符串的文件中的<code>old</code>都替换成<code>new</code></td>
+</tr>
+<tr>
+<td align="left"><code>awk</code></td>
+<td align="left"><code>awk -F'_' '{print $1}' a.list</code> <br> <br> 将a.list中每行按’_’分隔，每行输出分隔后的第一个字符串，例如<code>1_2_3</code>-&gt; <code>1</code></td>
+</tr>
+<tr>
+<td align="left"><code>xargs</code></td>
+<td align="left"><code>find . -name "*.jpg" | xargs -i rm {}</code> <br> <code>find . -name "*.jpg" | xargs rm</code><br> <br> 找到本目录下所有的jpg文件并删除 <br><code>-P</code>: 多进程 <br> <code>-n</code>: 一般配合”-P”参数</td>
+</tr>
+<tr>
+<td align="left"><code>comm</code></td>
+<td align="left"><code>comm -23 a.sort b.sort</code><br> <br> 输出在a中，不在b中的行</td>
+</tr>
+<tr>
+<td align="left"><code>grep</code></td>
+<td align="left"><code>cat a.list | grep png</code><br> <br> 找到a.list中包含png的行 <br> <code>-R</code> 递归查找<br> <code>-n</code> 列出行号  <br> <code>-l</code> 列出匹配的文件名 <br>  <code>-a</code> <br> <code>-o</code><br><code>-i</code>不区分大小写<br> <br> <code>grep "abc" . -nr</code> 查找当前路径下含有“abc”的文件，列出文件名，行号和匹配内容<br> <code>grep "abc" . -lr</code> 查找当前路径下含有“abc”的文件，列出文件名</td>
+</tr>
+<tr>
+<td align="left"><code>rev</code></td>
+<td align="left"><code>rev &lt;file&gt;</code><br>  <code>find . -type f | rev | cut -d'/' -f1 | rev # revcut'/' </code> <br> <br> reverse the file(or reverse the stdin if no file provided)</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="系统相关"><a href="#系统相关" class="headerlink" title="系统相关"></a>系统相关</h3><table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>htop</code> <code>top</code></td>
+<td align="left">查看各个进程的实时CUP占用率、内存使用，进程ID，命令行，启动时间，用户等信息。以及机器整体的CPU占用率和内存使用情况。</td>
+</tr>
+<tr>
+<td align="left"><code>ps</code></td>
+<td align="left"><code>ps aux</code> <br> <code>ps auxf</code></td>
+</tr>
+<tr>
+<td align="left"><code>dstat</code></td>
+<td align="left">系统资源统计。可以查看每秒的CPU，磁盘读写，网络出入等信息</td>
+</tr>
+<tr>
+<td align="left"><code>nvidia-smi </code></td>
+<td align="left">查看GPU的状态</td>
+</tr>
+<tr>
+<td align="left"><code>ssh</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>scp</code></td>
+<td align="left"><code>scp -r $scr $dest</code> <br><br>机器之间复制文件</td>
+</tr>
+<tr>
+<td align="left"><code>rsync</code></td>
+<td align="left"><code>rsync -avzP $src $dest</code><br> <br> 和scp接近，文件传输工具。特别适用于大量小文件场合，此时速度会明显快于scp。<br>  <code>-e</code>: <code>rsync -avhP -e "ssh -carcfour"</code><br>可以指定ssh参数,如端口/证书等</td>
+</tr>
+<tr>
+<td align="left"><code>tmux</code></td>
+<td align="left"><a target="_blank" rel="noopener" href="https://gist.github.com/MohamedAlaa/2961058">https://gist.github.com/MohamedAlaa/2961058</a> <br> <br> tmux is a terminal multiplexer，你会经常在服务器上工作，应该尽快掌握tmux</td>
+</tr>
+<tr>
+<td align="left"><code>kill</code> <code>pkill</code> <code>killall</code></td>
+<td align="left"><code>kill &lt;process_id&gt;</code> <br> <code>kill -9 &lt;process_id&gt;</code> <br> <code>killall python</code> <br> <code>pkill _unittest</code> <br><br> 杀死进程</td>
+</tr>
+<tr>
+<td align="left">后台运行相关</td>
+<td align="left"><code>./a_time_comsuming_process &amp;&gt; 1.log</code><br> <code>jobs</code><br> <code>fg</code> (ctrl-z)<br> <code>bg</code> (ctrl-z)</td>
+</tr>
+</tbody></table>
+<h3 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h3><table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>netstat</code></td>
+<td align="left"><code>netstat -anp|grep &lt;port&gt;</code> 网络详细信息</td>
+</tr>
+<tr>
+<td align="left"><code>lsof</code></td>
+<td align="left"><code>lsof -i:&lt;port&gt;</code></td>
+</tr>
+<tr>
+<td align="left"><code>ping</code></td>
+<td align="left"><code>ping www.baidu.com</code></td>
+</tr>
+<tr>
+<td align="left"><code>ifconfig</code></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h3><table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>wget</code></td>
+<td align="left"><code>wget http://some.server.com/thewantedarticle.pdf -O /tmp/local.pdf</code> <br> 下载工具</td>
+</tr>
+<tr>
+<td align="left"><code>curl</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>jq</code></td>
+<td align="left">用于解析json <br><code>$ echo '{"key1":"value1","key2":"value2"}' | jq '.key2'</code> <br> <code>"value2"</code></td>
+</tr>
+<tr>
+<td align="left"><code>parallel</code></td>
+<td align="left">用于并行执行多个相近的命令 <br> <code>cat 20urls.list | parallel -j 4 wget -q {} </code></td>
+</tr>
+<tr>
+<td align="left"><code>xargs</code></td>
+<td align="left"><code>xargs</code>非常强大 <br> <code>find . -type f |grep '2018/03' | xargs -I {} wc -l {} </code> <br> <code>find . -type f |grep '2018/03' | xargs wc -l</code></td>
+</tr>
+</tbody></table>
+<h2 id="Linux-Package-Manager"><a href="#Linux-Package-Manager" class="headerlink" title="Linux Package Manager"></a>Linux Package Manager</h2><table>
+<thead>
+<tr>
+<th align="left">Command</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>sudo apt-get update</code></td>
+<td align="left">更新源列表中的软件列表</td>
+</tr>
+<tr>
+<td align="left"><code>sudo apt-get upgrade</code></td>
+<td align="left">把本地已安装的软件，与刚下载的软件列表里对应软件进行对比，如果发现已安装的软件版本太低，就会提示你更新。</td>
+</tr>
+</tbody></table>
+<h2 id="Bash脚本语法"><a href="#Bash脚本语法" class="headerlink" title="Bash脚本语法"></a>Bash脚本语法</h2><p>“#！”: shebang。使用<code>chmod +x file</code>使sh脚本文件可以运行。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ol>
+<li><p>基本用法</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">des=<span class="string">"awe and cool"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$des</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">${des}</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"This is <span class="variable">${des}</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>内置变量</p>
+<p> <code>$0</code>, <code>$1</code>, <code>$2</code>…: 脚本参数</p>
+</li>
+<li><p>输出赋值</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ret=`cat readme.txt`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$ret</span></span><br><span class="line"></span><br><span class="line">ret=$(cat readme.txt)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$ret</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>运算</p>
+<p> let: </p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> <span class="string">"a = 5 + 6"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$a</span></span><br><span class="line"></span><br><span class="line">x=11</span><br><span class="line">y=22</span><br><span class="line"><span class="built_in">let</span> <span class="string">"z = x * y"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$z</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p> expr:</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ expr 5 + 6</span><br><span class="line">11</span><br><span class="line"></span><br><span class="line">$ foo=$(expr 5 + 6)</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$foo</span></span><br><span class="line">11</span><br></pre></td></tr></tbody></table></figure>
+<p> 注意：运算符和各个数字之间需要有空格</p>
+<p> 双括号</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=$((<span class="number">5</span>+<span class="number">6</span>))</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>判断语句</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> &lt;condition&gt;</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    &lt;cmd&gt;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    &lt;cmd&gt;</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
+
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tmp=35</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">${tmp}</span> -ge 30 ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"It's too hot"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>! EXPRESSION</code></td>
+<td align="left">The EXPRESSION is false.</td>
+</tr>
+<tr>
+<td align="left"><code>-n STRING</code></td>
+<td align="left">The length of STRING is greater than zero.</td>
+</tr>
+<tr>
+<td align="left"><code>-z STRING</code></td>
+<td align="left">The lengh of STRING is zero (ie it is empty).</td>
+</tr>
+<tr>
+<td align="left"><code>STRING1 = STRING2</code></td>
+<td align="left">STRING1 is equal to STRING2</td>
+</tr>
+<tr>
+<td align="left"><code>STRING1 != STRING2</code></td>
+<td align="left">STRING1 is not equal to STRING2</td>
+</tr>
+<tr>
+<td align="left"><code>INTEGER1 -eq INTEGER2</code></td>
+<td align="left">INTEGER1 is numerically equal to INTEGER2</td>
+</tr>
+<tr>
+<td align="left"><code>INTEGER1 -gt INTEGER2</code></td>
+<td align="left">INTEGER1 is numerically greater than INTEGER2</td>
+</tr>
+<tr>
+<td align="left"><code>INTEGER1 -lt INTEGER2</code></td>
+<td align="left">INTEGER1 is numerically less than INTEGER2</td>
+</tr>
+<tr>
+<td align="left"><code>-d FILE</code></td>
+<td align="left">FILE exists and is a directory.</td>
+</tr>
+<tr>
+<td align="left"><code>-e FILE</code></td>
+<td align="left">FILE exists.</td>
+</tr>
+<tr>
+<td align="left"><code>-r FILE</code></td>
+<td align="left">FILE exists and the read permission is granted.</td>
+</tr>
+<tr>
+<td align="left"><code>-s FILE</code></td>
+<td align="left">FILE exists and it’s size is greater than zero (ie. it is not empty).</td>
+</tr>
+<tr>
+<td align="left"><code>-w FILE</code></td>
+<td align="left">FILE exists and the write permission is granted.</td>
+</tr>
+<tr>
+<td align="left"><code>-x FILE</code></td>
+<td align="left">FILE exists and the execute permission is granted.</td>
+</tr>
+</tbody></table>
+<p> test命令：</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">test</span> 5 -ge 4</span><br><span class="line">$ <span class="built_in">echo</span> $?</span><br><span class="line">0</span><br></pre></td></tr></tbody></table></figure>
+<p> test命令的结果，0表示true或命令运行成功；1表示false或运行失败。</p>
+</li>
+<li><p>布尔运算</p>
+<p> <code>&amp;&amp;</code>, <code>||</code></p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ <span class="variable">$code_review</span> = <span class="string">"pass"</span> ] &amp;&amp; [ <span class="variable">$regression_test</span> = <span class="string">"pass"</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"ship it!"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>循环语句</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> var <span class="keyword">in</span> &lt;list&gt;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    &lt;cmd&gt;</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></tbody></table></figure>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> John, Emma, Tom</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"My name is <span class="variable">$name</span>"</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> {1..10}</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"count <span class="variable">$num</span>"</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ((i=0; i&lt;10; i++))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"count <span class="variable">$i</span>"</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>until语句</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until [ some_test ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    &lt;cmd&gt;</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></tbody></table></figure>
+
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">suffix=1</span><br><span class="line">until [ ! -e <span class="string">"foo<span class="variable">${suffix}</span>"</span> ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">let</span> suffix++</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"The file name foo<span class="variable">${suffix}</span> is good.</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>break</p>
+</li>
+<li><p>continue</p>
+</li>
+<li><p>函数</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">function_name</span></span> () {</span><br><span class="line">&lt;commands&gt;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">discuss_langauges</span></span>() {</span><br><span class="line">language1=<span class="variable">$1</span></span><br><span class="line">language2=<span class="variable">$2</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$1</span> is a good language."</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$2</span> is also a good language."</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用不需括号</span></span><br><span class="line">discuss_langauges c++ python</span><br></pre></td></tr></tbody></table></figure>
+
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">find_cpp_files</span></span>() {</span><br><span class="line"><span class="built_in">local</span> folder=<span class="variable">$1</span></span><br><span class="line"><span class="built_in">local</span> ret=$(find <span class="variable">${folder}</span> -name <span class="string">'*.cpp'</span> | wc -l)</span><br><span class="line"><span class="built_in">return</span> <span class="variable">$ret</span></span><br><span class="line">}</span><br><span class="line">folder=/home/hchen/code/ficus/common/machine_learning</span><br><span class="line">find_cpp_files <span class="variable">$folder</span></span><br><span class="line">num_files=$?</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"There are <span class="variable">${num_files}</span> cpp files in <span class="variable">${folder}</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ol>
+<h3 id="调试技巧"><a href="#调试技巧" class="headerlink" title="调试技巧"></a>调试技巧</h3><ul>
+<li><code>set -e</code></li>
+<li><code>set -x</code></li>
+</ul>
+<h3 id="实用案例"><a href="#实用案例" class="headerlink" title="实用案例"></a>实用案例</h3><ol>
+<li><p>Test if a comand outputs an <strong>empty string</strong>: </p>
+<p> <code>if [[ $(YOUR_COMMAND)]]</code></p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ls directory</span></span><br><span class="line"><span class="keyword">if</span> [[ $(ls -A) ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"there are files"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"no files found"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># grep file context </span></span><br><span class="line"><span class="keyword">if</span> [[ $(cat file | grep key_word) ]]; <span class="keyword">then</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"find key_word in the file"</span></span><br><span class="line"><span class="keyword">then</span> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Not found"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>Check whether the last command complete successfully.</p>
+<p> <code>$?</code>: the exit code of the last command (zero for success, non-zero for failure).</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">files=$(ls -A)</span><br><span class="line"><span class="keyword">if</span> [[ $? != 0 ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Command failed."</span></span><br><span class="line"><span class="keyword">elif</span> [[ <span class="variable">$files</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Files found."</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"No files found."</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Bash/" rel="tag"># Bash</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/02/tech/toolkit/docker-toolkit/" rel="next" title="Docker Toolkit">
+      Docker Toolkit <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bash-and-Linux-ToolKit"><span class="nav-number">1.</span> <span class="nav-text">Bash and Linux ToolKit</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">1.1.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">1.1.1.</span> <span class="nav-text">标准输入输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.2.</span> <span class="nav-text">文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">1.1.3.</span> <span class="nav-text">文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.4.</span> <span class="nav-text">系统相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.5.</span> <span class="nav-text">网络相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="nav-number">1.1.6.</span> <span class="nav-text">常用工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-Package-Manager"><span class="nav-number">1.2.</span> <span class="nav-text">Linux Package Manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bash%E8%84%9A%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">Bash脚本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7"><span class="nav-number">1.3.2.</span> <span class="nav-text">调试技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="nav-number">1.3.3.</span> <span class="nav-text">实用案例</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Di Lin" src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Di Lin</p>
+  <div class="site-description" itemprop="description">Di Lin's personal blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dilin-ms" title="GitHub → https://github.com/dilin-ms" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lindisjtu@gmail.com" title="E-Mail → mailto:lindisjtu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100015508938807" title="FB Page → https://www.facebook.com/profile.php?id=100015508938807" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.weibo.com/2196766810" title="Weibo → https://www.weibo.com/2196766810" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.instagram.com/lindisjtu/" title="Instagram → https://www.instagram.com/lindisjtu/" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Di Lin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+<script src="/bundle.js"></script></body></html>

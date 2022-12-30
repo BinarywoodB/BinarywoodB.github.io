@@ -1,0 +1,554 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+
+
+
+
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"binarywoodb.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="The UML Class diagram is a graphical notation used to construct and visualize object oriented systems. A class diagram in the Unified Modeling Language (UML) is a type of static structure diagram that">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UML Class Diagram">
+<meta property="og:url" content="https://binarywoodb.github.io/2021/03/22/tech/toolkit/uml-class-diagram/index.html">
+<meta property="og:site_name" content="Di Lin's Blog">
+<meta property="og:description" content="The UML Class diagram is a graphical notation used to construct and visualize object oriented systems. A class diagram in the Unified Modeling Language (UML) is a type of static structure diagram that">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/02-class-notation.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/04-class-attributes-with-different-visibility.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/05-parameter-directionality.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/06-perspective-of-class-diagram.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/07-relationships-between-classes.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/inheritance.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/realization.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/15-dependency-example.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/dependency.jpg">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/association.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/association02.jpg">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/aggregation.jpg">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/composition.jpg">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/11-associations-with-different-multiplicies.png">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/multiplicity.jpg">
+<meta property="og:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/sum.jpg">
+<meta property="article:published_time" content="2021-03-22T18:08:13.000Z">
+<meta property="article:modified_time" content="2022-12-29T17:32:23.092Z">
+<meta property="article:author" content="Di Lin">
+<meta property="article:tag" content="UML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://binarywoodb.github.io/images/tech/toolkit/uml-class-diagram/02-class-notation.png">
+
+<link rel="canonical" href="https://binarywoodb.github.io/2021/03/22/tech/toolkit/uml-class-diagram/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>UML Class Diagram | Di Lin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<script>function loadCss(l){var d=document,h=d.head,s=d.createElement('link');s.rel='stylesheet';s.href=l;!function e(f){if (d.body)return f();setTimeout(function(){e(f)})}(function(){h.appendChild(s);});}loadCss('/style.css');loadCss('//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');</script><noscript><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"></noscript></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Di Lin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-cv">
+
+    <a href="/CV/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>CV</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binarywoodb.github.io/2021/03/22/tech/toolkit/uml-class-diagram/">
+
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Di Lin">
+      <meta itemprop="description" content="Di Lin's personal blog">
+    </span>
+
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Di Lin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UML Class Diagram
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-22 11:08:13" itemprop="dateCreated datePublished" datetime="2021-03-22T11:08:13-07:00">2021-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-12-29 09:32:23" itemprop="dateModified" datetime="2022-12-29T09:32:23-08:00">2022-12-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tech/Toolkit/" itemprop="url" rel="index"><span itemprop="name">Toolkit</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>The UML Class diagram is a graphical notation used to construct and visualize object oriented systems. A class diagram in the <strong>Unified Modeling Language (UML)</strong> is a type of static structure diagram that describes the structure of a system by showing the system’s:</p>
+<ul>
+<li>classes</li>
+<li>their attributes</li>
+<li>operations (or methods)</li>
+<li>and the relationships among objects.</li>
+</ul>
+<h2 id="UML-Class-Notation"><a href="#UML-Class-Notation" class="headerlink" title="UML Class Notation"></a>UML Class Notation</h2><p>A class represent a concept which encapsulates state (<strong>attributes</strong>) and behavior (<strong>operations</strong>). Each attribute has a type. Each <strong>operation</strong> has a <strong>signature</strong>. The class name is the <strong>only mandatory information</strong>.</p>
+<p><img src="/images/tech/toolkit/uml-class-diagram/02-class-notation.png" alt="02-class-notation.png"></p>
+<h3 id="Class-Visibility"><a href="#Class-Visibility" class="headerlink" title="Class Visibility"></a>Class Visibility</h3><p>The <code>+</code>, <code>-</code> and <code>#</code> symbols before an attribute and operation name in a class denote the visibility of the attribute and operation.</p>
+<p><img src="/images/tech/toolkit/uml-class-diagram/04-class-attributes-with-different-visibility.png" alt="04-class-attributes-with-different-visibility.png"></p>
+<ul>
+<li><code>+</code> denotes public attributes or operations</li>
+<li><code>-</code> denotes private attributes or operations</li>
+<li><code>#</code> denotes protected attributes or operations</li>
+</ul>
+<h3 id="Parameter-Directionality"><a href="#Parameter-Directionality" class="headerlink" title="Parameter Directionality"></a>Parameter Directionality</h3><p>Each parameter in an operation (method) may be denoted as <strong>in</strong>, <strong>out</strong> or <strong>inout</strong> which specifies its direction with respect to the caller. This directionality is shown before the parameter name.</p>
+<p><img src="/images/tech/toolkit/uml-class-diagram/05-parameter-directionality.png" alt="05-parameter-directionality.png"></p>
+<h2 id="Perspectives-of-Class-Diagram"><a href="#Perspectives-of-Class-Diagram" class="headerlink" title="Perspectives of Class Diagram"></a>Perspectives of Class Diagram</h2><p>The choice of perspective depends on how far along you are in the development process. During the formulation of a <em>domain model</em>, for example, you would seldom move past the <strong>conceptual perspective</strong>. <em>Analysis models</em> will typically feature a mix of <strong>conceptual and specification perspectives</strong>. <em>Design model development</em> will typically start with heavy emphasis on the <strong>specification perspective</strong>, and evolve into the <strong>implementation perspective</strong>.</p>
+<p>A diagram can be interpreted from various perspectives:</p>
+<ul>
+<li><strong>Conceptual</strong>: represents the concepts in the domain</li>
+<li><strong>Specification</strong>: focus is on the interfaces of Abstract Data Type (ADTs) in the software</li>
+<li><strong>Implementation</strong>: describes how classes will implement their interfaces</li>
+</ul>
+<p>The perspective affects the amount of detail to be supplied and the kinds of relationships worth presenting. As we mentioned above, the class name is the only mandatory information.</p>
+<p><img src="/images/tech/toolkit/uml-class-diagram/06-perspective-of-class-diagram.png" alt="06-perspective-of-class-diagram.png"></p>
+<h2 id="Relationships-between-classes"><a href="#Relationships-between-classes" class="headerlink" title="Relationships between classes"></a>Relationships between classes</h2><p>类的关系有泛化(Generalization)、实现(Realization)、依赖(Dependency)和关联(Association)。其中关联又分为一般关联关系和聚合关系(Aggregation), 合成关系(Composition)。</p>
+<p><img src="/images/tech/toolkit/uml-class-diagram/07-relationships-between-classes.png" alt="07-relationships-between-classes.png"></p>
+<blockquote>
+<p>虚线箭头指向依赖；<br>实线箭头指向关联；<br>虚线三角指向接口；<br>实线三角指向父类；<br>空心菱形能分离而独立存在，是聚合；<br>实心菱形精密关联不可分，是组合；</p>
+</blockquote>
+<ol>
+<li><p><strong>泛化(generalization)</strong> ：表示 <strong>is-a</strong> 的关系，是对象之间耦合度最大的一种关系，子类继承父类的所有细节。直接使用语言中的继承表达。在类图中使用带三角箭头的实线表示，箭头从子类指向父类。</p>
+<p> <img src="/images/tech/toolkit/uml-class-diagram/inheritance.png" alt="inheritance"></p>
+<ul>
+<li>An abstract class name is shown in italics.</li>
+</ul>
+</li>
+<li><p><strong>实现(Realization)</strong>:在类图中就是接口和实现的关系。在类图中使用带三角箭头的虚线表示，箭头从实现类指向接口。</p>
+<p> <img src="/images/tech/toolkit/uml-class-diagram/realization.png" alt="realization"></p>
+</li>
+<li><p><strong>依赖(Dependency)</strong> ：对象之间最弱的一种关联方式，是临时性的关联。代码中一般指由局部变量、函数参数、返回值建立的对于其他对象的调用关系。一个类调用被依赖类中的某些方法而得以完成这个类的一些职责。在类图使用带箭头的虚线表示，箭头从使用类指向被依赖的类。</p>
+<p> <img src="/images/tech/toolkit/uml-class-diagram/15-dependency-example.png" alt="15-dependency-example.png"><br> <img src="/images/tech/toolkit/uml-class-diagram/dependency.jpg" alt="dependency"></p>
+</li>
+<li><p><strong>关联(Association)</strong>: 对象之间一种引用关系，比如客户类与订单类之间的关系。这种关系通常使用类的属性表达。关联又分为一般关联、聚合关联与组合关联。</p>
+<ol>
+<li><p>一般关联。在类图使用带箭头的实线表示，箭头从使用类指向被关联的类。可以是单向和双向。</p>
+<p> <img src="/images/tech/toolkit/uml-class-diagram/association.png" alt="association"><br> <img src="/images/tech/toolkit/uml-class-diagram/association02.jpg" alt="association02"></p>
+</li>
+<li><p><strong>聚合(Aggregation)</strong> ：表示 <strong>has-a</strong> 的关系，是一种不稳定的包含关系。较强于一般关联,有整体与局部的关系,并且没有了整体,局部也可单独存在。如公司和员工的关系，公司包含员工，但如果公司倒闭，员工依然可以换公司。在类图使用空心的菱形表示，菱形从局部指向整体。</p>
+<p> <img src="/images/tech/toolkit/uml-class-diagram/aggregation.jpg" alt="aggregation"></p>
+</li>
+<li><p><strong>组合(Composition)</strong> ：表示 <strong>contains-a</strong> 的关系，是一种强烈的包含关系。组合类负责被组合类的生命周期。是一种更强的聚合关系。部分不能脱离整体存在。如公司和部门的关系，没有了公司，部门也不能存在了；调查问卷中问题和选项的关系；订单和订单选项的关系。在类图使用实心的菱形表示，菱形从局部指向整体。<br> <img src="/images/tech/toolkit/uml-class-diagram/composition.jpg" alt="composition"></p>
+<p>Cardinality is expressed in terms of:</p>
+<ul>
+<li>one to one</li>
+<li>one to many</li>
+<li>many to many</li>
+</ul>
+<p><img src="/images/tech/toolkit/uml-class-diagram/11-associations-with-different-multiplicies.png" alt="11-associations-with-different-multiplicies.png"></p>
+<p>多重性(Multiplicity) : 通常在关联、聚合、组合中使用。就是代表有多少个关联对象存在。使用数字..星号（数字）表示。如下图，一个割接通知可以关联0个到N个故障单。<br><img src="/images/tech/toolkit/uml-class-diagram/multiplicity.jpg" alt="multiplicity"></p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="Relationship-Discrimination"><a href="#Relationship-Discrimination" class="headerlink" title="Relationship Discrimination"></a>Relationship Discrimination</h2><h3 id="聚合和组合的区别"><a href="#聚合和组合的区别" class="headerlink" title="聚合和组合的区别"></a>聚合和组合的区别</h3><p>聚合关系是“has-a”关系，组合关系是“contains-a”关系；聚合关系表示整体与部分的关系比较弱，而组合比较强；聚合关系中代表部分事物的对象与代表聚合事物的对象的生存期无关，一旦删除了聚合对象不一定就删除了代表部分事物的对象。组合中一旦删除了组合对象，同时也就删除了代表部分事物的对象。</p>
+<h3 id="依赖和关联的区别"><a href="#依赖和关联的区别" class="headerlink" title="依赖和关联的区别"></a>依赖和关联的区别</h3><ul>
+<li><p>依赖（Dependency）</p>
+<p>  从字面理解的话，是说一个类用到了另一个类。这种使用关系是具有偶然性的、临时性的、非常弱的。比如下图中的依赖关系，司机开车，要依赖车。在代码上表现的话一般为函数参数，或者局部变量或者对静态方法的调用。注意依赖关系只能是单向的，并且依赖关系强调的是 <strong>使用上的关系</strong>。</p>
+</li>
+<li><p>关联（Association）</p>
+<ul>
+<li>关联关系强调的是一种<strong>结构上的关系</strong></li>
+<li>他可以是<strong>单向的或者双向</strong>的</li>
+<li>从语义级别(上下文)可以分为聚合和组合，在代码实现上关联和聚合是很像的，主要区别在语义上</li>
+<li>一般来说双方关系是平等的，比如我和我的朋友</li>
+<li>在java语言上一般表现为全局变量。如person类和company类,顾客和地址,客户和订单</li>
+</ul>
+</li>
+</ul>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p><img src="/images/tech/toolkit/uml-class-diagram/sum.jpg" alt="sum"></p>
+<h2 id="Software-to-Draw-UML-Class-Diagram"><a href="#Software-to-Draw-UML-Class-Diagram" class="headerlink" title="Software to Draw UML Class Diagram"></a>Software to Draw UML Class Diagram</h2><ul>
+<li>Visio</li>
+<li>Enterprise Architect</li>
+<li>Rose</li>
+</ul>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-class-diagram-tutorial/">UML Class Diagram Tutorial</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.shuzhiduo.com/A/WpdK40kozV/">最清晰易懂的UML类图与类的关系详解</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UML/" rel="tag"># UML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/15/tech/nodejs/npm-dependency-resolution/" rel="prev" title="Understanding Npm Dependency Resolution">
+      <i class="fa fa-chevron-left"></i> Understanding Npm Dependency Resolution
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/26/tech/toolkit/npm-toolkit/" rel="next" title="Npm Toolkit">
+      Npm Toolkit <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UML-Class-Notation"><span class="nav-number">1.</span> <span class="nav-text">UML Class Notation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-Visibility"><span class="nav-number">1.1.</span> <span class="nav-text">Class Visibility</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameter-Directionality"><span class="nav-number">1.2.</span> <span class="nav-text">Parameter Directionality</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perspectives-of-Class-Diagram"><span class="nav-number">2.</span> <span class="nav-text">Perspectives of Class Diagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Relationships-between-classes"><span class="nav-number">3.</span> <span class="nav-text">Relationships between classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Relationship-Discrimination"><span class="nav-number">4.</span> <span class="nav-text">Relationship Discrimination</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%92%8C%E7%BB%84%E5%90%88%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.1.</span> <span class="nav-text">聚合和组合的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%92%8C%E5%85%B3%E8%81%94%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.2.</span> <span class="nav-text">依赖和关联的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">5.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Software-to-Draw-UML-Class-Diagram"><span class="nav-number">6.</span> <span class="nav-text">Software to Draw UML Class Diagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ref"><span class="nav-number">7.</span> <span class="nav-text">Ref</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Di Lin" src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Di Lin</p>
+  <div class="site-description" itemprop="description">Di Lin's personal blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dilin-ms" title="GitHub → https://github.com/dilin-ms" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lindisjtu@gmail.com" title="E-Mail → mailto:lindisjtu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100015508938807" title="FB Page → https://www.facebook.com/profile.php?id=100015508938807" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.weibo.com/2196766810" title="Weibo → https://www.weibo.com/2196766810" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.instagram.com/lindisjtu/" title="Instagram → https://www.instagram.com/lindisjtu/" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  © 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Di Lin</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> &amp; <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+<script src="/bundle.js"></script></body></html>
